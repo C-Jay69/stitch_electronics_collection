@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Management List | Shopaholics Inc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-gradient {
+            background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+        }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<div class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/10">
+<div class="flex items-center p-4 justify-between">
+<div class="flex items-center gap-3">
+<div class="text-primary flex size-10 shrink-0 items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Shopaholics Admin</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-widest">Inventory Control</p>
+</div>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<main class="max-w-md mx-auto pb-24">
+<!-- Action Header -->
+<div class="px-4 py-6">
+<div class="flex flex-col gap-4">
+<h1 class="text-3xl font-bold tracking-tighter">Product Management</h1>
+<p class="text-slate-500 dark:text-slate-400 -mt-2">Managing your empire of unnecessary things.</p>
+<button class="custom-gradient w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl text-white font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Add New Splurge</span>
+</button>
+</div>
+</div>
+<!-- Search & Filter Section -->
+<div class="px-4 pb-6 space-y-4">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full h-14 bg-white dark:bg-[#271834] border border-slate-200 dark:border-[#4d3168] rounded-xl pl-12 pr-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-[#ae90cb]" placeholder="Search for stuff you're selling..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex-1">
+<select class="w-full h-12 bg-white dark:bg-[#271834] border border-slate-200 dark:border-[#4d3168] rounded-lg px-4 text-sm font-medium focus:ring-primary focus:border-primary appearance-none">
+<option value="">Bulk Actions</option>
+<option value="delete">Delete Selected</option>
+<option value="out-of-stock">Mark Out of Stock</option>
+<option value="discount">Add 50% Tax (oops, discount)</option>
+</select>
+</div>
+<button class="h-12 w-12 flex items-center justify-center border border-slate-200 dark:border-[#4d3168] rounded-lg bg-white dark:bg-[#271834]">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Inventory List -->
+<div class="px-4 space-y-3">
+<div class="flex items-center justify-between px-1 mb-2">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Inventory List (4)</h3>
+<span class="material-symbols-outlined text-slate-400 text-lg">sort_by_alpha</span>
+</div>
+<!-- Product Row 1 -->
+<div class="bg-white dark:bg-[#271834] border border-slate-100 dark:border-white/5 rounded-xl p-4 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-4">
+<div class="size-12 rounded-lg bg-slate-100 dark:bg-[#362249] flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">diamond</span>
+</div>
+<div>
+<h4 class="font-bold text-base">Useless Gold Stapler</h4>
+<p class="text-xs font-mono text-slate-500 dark:text-[#ae90cb]">SKU-8829-AU</p>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-400">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-red-400">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-white/5">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-slate-400 font-bold">Price</span>
+<span class="text-sm font-bold">$1,299.00</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-slate-400 font-bold">Stock</span>
+<span class="text-sm font-bold text-green-500">12 units</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase">Luxury</span>
+</div>
+</div>
+<!-- Product Row 2 (Low Stock) -->
+<div class="bg-white dark:bg-[#271834] border border-slate-100 dark:border-white/5 rounded-xl p-4 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-4">
+<div class="size-12 rounded-lg bg-slate-100 dark:bg-[#362249] flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">headphones</span>
+</div>
+<div>
+<h4 class="font-bold text-base">Invisible Earbuds</h4>
+<p class="text-xs font-mono text-slate-500 dark:text-[#ae90cb]">SKU-VOID-01</p>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-400">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-red-400">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-white/5">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-slate-400 font-bold">Price</span>
+<span class="text-sm font-bold">$499.00</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-slate-400 font-bold">Stock</span>
+<span class="text-sm font-bold text-amber-500">2 units</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-bold rounded uppercase">Tech</span>
+</div>
+</div>
+<!-- Product Row 3 (Out of Stock) -->
+<div class="bg-white dark:bg-[#271834] border border-slate-100 dark:border-white/5 rounded-xl p-4 shadow-sm opacity-75">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-4">
+<div class="size-12 rounded-lg bg-slate-100 dark:bg-[#362249] flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">potted_plant</span>
+</div>
+<div>
+<h4 class="font-bold text-base">Self-Dying Cactus</h4>
+<p class="text-xs font-mono text-slate-500 dark:text-[#ae90cb]">SKU-RIP-PLANT</p>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-400">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-red-400">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-white/5">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-slate-400 font-bold">Price</span>
+<span class="text-sm font-bold">$15.00</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-slate-400 font-bold">Stock</span>
+<span class="text-sm font-bold text-red-500">0 units</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded uppercase">Home</span>
+</div>
+</div>
+<!-- Empty State Illustration Placeholder (Hidden if list has items, but included as per prompt) -->
+<div class="hidden py-12 flex flex-col items-center text-center px-8">
+<div class="size-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-5xl text-primary/40">shopping_bag</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Nothing here yet.</h3>
+<p class="text-slate-500 dark:text-[#ae90cb] text-sm">Time to fill the shelves, big shot.</p>
+<button class="mt-6 text-primary font-bold flex items-center gap-1">
+<span>Create first product</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Footer Padding -->
+<div class="h-10"></div>
+</main>
+<!-- Bottom Nav (Native look) -->
+<div class="fixed bottom-0 inset-x-0 bg-background-light dark:bg-[#1a1023] border-t border-slate-200 dark:border-white/10 pb-6 pt-2 px-6">
+<div class="flex justify-between items-center max-w-md mx-auto">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Inventory</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Sales</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold">Customers</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</div>
+</div>
+</div>
+</body></html>

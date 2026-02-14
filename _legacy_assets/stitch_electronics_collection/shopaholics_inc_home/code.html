@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopaholics Inc Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#191022",
+                        "surface-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-text {
+            background: linear-gradient(to right, #a855f7, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Fixed Top Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-slate-200 dark:border-white/10">
+<div class="flex items-center justify-between px-6 h-16 max-w-md mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">shopping_bag</span>
+<span class="font-bold text-lg tracking-tight">Shopaholics<span class="text-primary">.</span></span>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-20 pb-24 max-w-md mx-auto px-6">
+<!-- Hero Section -->
+<section class="py-10">
+<h1 class="text-5xl font-bold leading-[1.1] tracking-tight mb-4">
+<span class="gradient-text">Shopping that doesn't suck.</span>
+</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg">
+                Just your money, gone. Minimalist vibes for maximum impulse.
+            </p>
+<div class="mt-8 relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-cyan-500 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative bg-white dark:bg-surface-dark rounded-xl overflow-hidden aspect-[4/3]">
+<img alt="Featured Headphones" class="w-full h-full object-cover" data-alt="Modern high-end headphones on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATYgXdAtsqpMn0IkZGytGV5ILkQGgnN8q21MPfK7rVB5U2gaKVsWpT5e1sTPkOgZGknmmabBSohh6bLLktq8k2HCEztKoJeQdKn05-BWcmOSFIgRMnAq7oJU5mh8cmNJP_iaPHA76rNhESnbDlvLkNC0elDbpV-W_h-qcgoEuuxg3AKrFMJPzBvxvxLb2S0Q_9-uuKSSpWBfXl878VP9PlWuSbRGHHoOYgR3da0k5Ltr3cBOQ7ru6TPN61ErPqq-ClctX1G0ONiDU"/>
+</div>
+</div>
+</section>
+<!-- Featured Product 2-Column Layout -->
+<section class="grid grid-cols-2 gap-6 items-center py-6">
+<div class="flex flex-col gap-2">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary">Limited Drop</h3>
+<h2 class="text-2xl font-bold leading-tight">The Overpriced Lamp.</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400 italic">It shines. Like your forehead after seeing the price.</p>
+<button class="mt-4 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-lg text-sm w-fit">
+                    Acquire Now
+                </button>
+</div>
+<div class="rounded-xl overflow-hidden bg-surface-dark aspect-square">
+<img alt="Designer Lamp" class="w-full h-full object-cover" data-alt="Minimalist designer lamp casting soft light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMTJD2Cm_gkQiZor1E7coN--VVkm4JYlVQI2ovy5_Y9u8YVEIMuglqGp-EWawnYImha5IFpp7-Tc3TgAzo8SE3xdL6fCf45LD5o7ey6_-JV5hbunXRU9nVbEN7FMCAuk4_53WwhsUH0sotuS8fJ2rTnduDmdOzUFHnWuc20gxUiTDTEEb61Cc9pn0WSk8di5d98ytTXLdHIUdF6cofZkmP9RhjJL_jKl4qc24YLf69B3Jtu1shCP-9ew7NHzjVzu557rknWuAg9ik"/>
+</div>
+</section>
+<!-- Main Categories Grid -->
+<section class="py-10">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold">The Damage</h2>
+<span class="text-primary text-sm font-medium">View all</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Category Card -->
+<div class="bg-surface-dark rounded-xl p-4 flex flex-col gap-4 aspect-square justify-between border border-white/5">
+<span class="material-symbols-outlined text-primary text-3xl">devices</span>
+<div>
+<h4 class="font-bold">Electronics</h4>
+<p class="text-xs text-slate-400">Shiny distractions.</p>
+</div>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-dark rounded-xl p-4 flex flex-col gap-4 aspect-square justify-between border border-white/5">
+<span class="material-symbols-outlined text-primary text-3xl">apparel</span>
+<div>
+<h4 class="font-bold">Fashion</h4>
+<p class="text-xs text-slate-400">Cover your regrets.</p>
+</div>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-dark rounded-xl p-4 flex flex-col gap-4 aspect-square justify-between border border-white/5">
+<span class="material-symbols-outlined text-primary text-3xl">home_iot_device</span>
+<div>
+<h4 class="font-bold">Smart Home</h4>
+<p class="text-xs text-slate-400">Spying on yourself.</p>
+</div>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-dark rounded-xl p-4 flex flex-col gap-4 aspect-square justify-between border border-white/5">
+<span class="material-symbols-outlined text-primary text-3xl">auto_awesome</span>
+<div>
+<h4 class="font-bold">Lifestyle</h4>
+<p class="text-xs text-slate-400">Things you don't need.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Shopaholics Anonymous Mate Widget -->
+<section class="py-6">
+<div class="bg-gradient-to-br from-card-dark to-black border border-primary/30 p-6 rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<h3 class="font-bold text-lg">Shopaholics Anonymous Mate</h3>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<p class="text-slate-400 leading-relaxed mb-4">
+                    "Three pairs of trainers? Let’s have a word, mate. Your bank account is crying in the corner."
+                </p>
+<div class="flex items-center gap-2 text-xs font-bold text-primary bg-primary/10 w-fit px-3 py-1 rounded-full">
+<span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+                    ACTIVE INTERVENTION
+                </div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-black/80 backdrop-blur-md border-t border-slate-200 dark:border-white/10 pb-6 pt-3 px-8 z-50">
+<div class="flex justify-between items-center max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[10px] font-medium">Search</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<div class="relative">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
+</div>
+<span class="text-[10px] font-medium">Intervention</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

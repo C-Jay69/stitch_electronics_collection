@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Witty Shopping Cart - Shopaholics Inc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .custom-gradient {
+            background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300">
+<div class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-10 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 justify-between">
+<div class="flex size-10 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined cursor-pointer">arrow_back_ios</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center">My Regrets</h2>
+<div class="flex size-10 items-center justify-end">
+<span class="material-symbols-outlined cursor-pointer">more_horiz</span>
+</div>
+</div>
+<div class="flex flex-col px-4 pt-6 pb-24">
+<!-- Witty Header -->
+<h1 class="text-[32px] font-bold leading-tight tracking-tight mb-8">
+                Cart’s heavier than a Sunday roast—sure you need it all?
+            </h1>
+<!-- Cart Items -->
+<div class="space-y-6 mb-10">
+<!-- Item 1 -->
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-24 shrink-0 shadow-sm border border-slate-200 dark:border-white/10" data-alt="Vibrant red designer running shoes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDivtYzABENaIIZbmq2wRj8I54vokgBxVmPnWRS0EfrBEEC_yl6Ea-TtrbfOSVOox_A90yzXR4Ne-z8qT5I6zj4kY6CIaHcS7QH76SYPJeC5X7fH9yj27jkA1ct1QjL4Cr3cEhQPhWAfn4zLuhE1lma8j804GQ2bbZwnEMhI1jXkAOubcUU4toZBK1KRiDWCdlphOOw7GAgmZq4QiKIBFGBi4iG6WlF7vIZxTnt1QagPqy8HqMCUKwDwdphYuC12cfpEbalmgedsFs");'></div>
+<div class="flex flex-col flex-1 gap-1">
+<div class="flex justify-between items-start">
+<p class="text-base font-bold leading-tight line-clamp-1">CloudWalker Elite</p>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-xl cursor-pointer">delete</span>
+</div>
+<p class="text-primary text-sm font-semibold">$349.00</p>
+<div class="flex items-center justify-between mt-2">
+<div class="flex items-center gap-3 bg-slate-100 dark:bg-white/5 rounded-full px-3 py-1">
+<button class="flex h-6 w-6 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10">-</button>
+<span class="text-sm font-bold w-4 text-center">1</span>
+<button class="flex h-6 w-6 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10">+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-24 shrink-0 shadow-sm border border-slate-200 dark:border-white/10" data-alt="Minimalist luxury gold watch" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRTZptKyA_Xg6srN7UrElo1DpaWG8dJRgAZPA80cjT865GFC_IkrZHduKo3lL1gepGzjZEHqRs2y11hGcwIxKGUfpHlfZtj2V4ChocwLxBz-94YKIpwxA9kzNpI0y0hLfHFAmOGJ2e66YHrJEX9TEVKqi9smV61xjGBlx8UFG-_83pQSdZBa_XKRwVEzhTM5j6Um7ZGFzElEVuUUUK9prgZXaJsEoadNEupDObY98zbKM0iPvFsrtUYwsXBme-DD07iT3dB6U0oT8");'></div>
+<div class="flex flex-col flex-1 gap-1">
+<div class="flex justify-between items-start">
+<p class="text-base font-bold leading-tight line-clamp-1">Obsidian Timepiece</p>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-xl cursor-pointer">delete</span>
+</div>
+<p class="text-primary text-sm font-semibold">$1,250.00</p>
+<div class="flex items-center justify-between mt-2">
+<div class="flex items-center gap-3 bg-slate-100 dark:bg-white/5 rounded-full px-3 py-1">
+<button class="flex h-6 w-6 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10">-</button>
+<span class="text-sm font-bold w-4 text-center">1</span>
+<button class="flex h-6 w-6 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10">+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Shopaholics Anonymous Intervention -->
+<div class="bg-primary/10 dark:bg-primary/5 border border-primary/30 rounded-xl p-5 mb-10">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<h3 class="text-lg font-bold leading-tight tracking-tight">Shopaholics Anonymous Mate</h3>
+</div>
+<div class="space-y-4">
+<!-- Intervention 1: Timer -->
+<div class="flex flex-col gap-2">
+<p class="text-sm font-medium opacity-80">Thinking of impulse buying the watch? Let’s sleep on it for 30 mins.</p>
+<div class="flex items-center gap-3 bg-white dark:bg-background-dark rounded-lg p-3 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl">timer</span>
+<div class="flex-1">
+<div class="h-1.5 w-full bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</div>
+<span class="text-xs font-bold font-mono">20:00</span>
+</div>
+</div>
+<div class="h-px bg-primary/20"></div>
+<!-- Intervention 2: Dupe -->
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<p class="text-sm font-medium opacity-80 mb-1">Our records show you’re not a billionaire. Try this instead?</p>
+<p class="text-xs font-bold text-primary uppercase tracking-wider">The "I have bills" Dupe • $45.00</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 border border-primary/30" data-alt="Generic minimalist black watch" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBhC5PXVcdTA4rtiJrsDdEN9BXG7TOb7RF8WqHPP2GEObF51FNC2bmNj5SDRlE4RtFjHwsSkL5Fh4gG8BF35aqsyDlo7eSVvMFy7YtOGF41zxpAzx0SN4R1nyIsFUwhOsChFC9alM1vvSSc1b6UEWm4VLBia1XID5RcipBhBCskwCGC1y7S1xLPRN-Te6423079war65LI-ohHmuRpYALEcjk-aCuGRssv_yOqjmJY7AGeX-nLPzLBefTIGmQbbODNgzM_-vhC8KDI");'></div>
+</div>
+</div>
+</div>
+<!-- Pricing Summary -->
+<div class="space-y-3 mb-8">
+<div class="flex justify-between text-sm">
+<span class="opacity-60">Subtotal (2 items)</span>
+<span class="font-medium">$1,599.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="opacity-60">Shipping (Instant Gratification)</span>
+<span class="font-medium text-green-500">FREE</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="opacity-60">Guilt Tax</span>
+<span class="font-medium">$0.00</span>
+</div>
+<div class="pt-3 border-t border-slate-200 dark:border-white/10 flex justify-between items-end">
+<span class="text-lg font-bold">Total Damage</span>
+<div class="text-right">
+<span class="text-2xl font-bold">$1,599.00</span>
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mt-0.5">Payment will hurt briefly</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Checkout Button Container -->
+<div class="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto p-4 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light dark:via-background-dark to-transparent pt-8">
+<button class="custom-gradient w-full py-4 rounded-xl text-white font-bold text-lg shadow-lg shadow-primary/25 flex items-center justify-center gap-2 group active:scale-[0.98] transition-transform">
+<span>Proceed to Checkout (if you must)</span>
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</button>
+</div>
+</div>
+</body></html>

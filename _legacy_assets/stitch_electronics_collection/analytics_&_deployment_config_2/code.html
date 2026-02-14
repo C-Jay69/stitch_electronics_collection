@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financial Reality Check</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "warning": "#ef4444",
+                        "background-dark": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .white-border {
+            border: 1px solid #ffffff;
+        }
+        .overflow-progress {
+            width: 150%;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark text-white font-display min-h-screen overflow-hidden">
+<div class="max-w-[430px] mx-auto min-h-screen flex flex-col bg-background-dark px-8 justify-center">
+<div class="mb-12">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-warning/10 border border-warning/30 mb-8">
+<span class="material-symbols-outlined text-warning text-4xl">account_balance_wallet</span>
+</div>
+<h1 class="text-4xl font-extrabold tracking-tight leading-[1.1] mb-4">
+                Computer Says <br/>No (Mostly)
+            </h1>
+<p class="text-lg text-white/60 leading-relaxed font-medium">
+                You set a limit of £300, and yet here we are at <span class="text-white">£450</span>. Math isn't your strong suit, is it?
+            </p>
+</div>
+<div class="space-y-4 mb-16">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold uppercase tracking-widest text-white/40">Budget Utilization</span>
+<span class="text-sm font-bold text-warning uppercase">150% Capacity</span>
+</div>
+<div class="relative h-12 w-full bg-white/10 rounded-xl overflow-hidden white-border">
+<div class="absolute inset-y-0 left-0 bg-warning w-[150%] flex items-center justify-end px-4">
+<span class="material-symbols-outlined text-white animate-pulse">priority_high</span>
+</div>
+</div>
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-tighter text-white/30">
+<span>£0</span>
+<span class="text-white/60">Limit (£300)</span>
+<span>Wait, stop</span>
+</div>
+</div>
+<div class="flex flex-col gap-6 items-center">
+<button class="w-full bg-white text-black font-extrabold py-5 rounded-xl active:scale-[0.97] transition-all text-sm uppercase tracking-widest">
+                Step Away From The Cart
+            </button>
+<a class="text-white/40 hover:text-warning text-xs font-bold uppercase tracking-widest underline decoration-white/20 underline-offset-8 transition-colors" href="#">
+                Proceed to Financial Ruin
+            </a>
+</div>
+<div class="fixed bottom-12 left-0 right-0 max-w-[430px] mx-auto flex justify-center opacity-20">
+<span class="text-[10px] font-medium tracking-[0.3em] uppercase">Shopaholics Inc. Reality Engine</span>
+</div>
+<div class="fixed bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full"></div>
+</div>
+
+</body></html>

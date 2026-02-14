@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Set the Sarcasm Level - Shopaholics Inc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-white font-display antialiased">
+<div class="relative flex min-h-screen w-full max-w-[430px] mx-auto flex-col bg-background-light dark:bg-background-dark overflow-x-hidden border-x border-white/5 shadow-2xl">
+<!-- Header / Progress Area -->
+<header class="flex w-full flex-col items-center justify-center pt-8 pb-4">
+<div class="flex w-full flex-row items-center justify-center gap-2.5 mb-2">
+<div class="h-1.5 w-12 rounded-full bg-primary/20"></div>
+<div class="h-1.5 w-12 rounded-full bg-primary"></div>
+<div class="h-1.5 w-12 rounded-full bg-primary/20"></div>
+</div>
+<p class="text-primary text-xs font-semibold uppercase tracking-widest mt-2">Onboarding 2 of 3</p>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col px-6 pt-10">
+<h1 class="text-white tracking-tight text-[36px] font-bold leading-[1.1] text-center mb-4">
+                How much truth can you handle?
+            </h1>
+<p class="text-white/60 text-center text-base font-normal leading-relaxed px-4 mb-12">
+                Your Personal Shopper Mate tells it like it is. Choose his personality level.
+            </p>
+<!-- Sarcasm Slider Component -->
+<div class="@container w-full space-y-6">
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between px-1">
+<span class="text-white/40 text-xs font-bold uppercase tracking-tighter">Level</span>
+<span class="text-primary text-sm font-bold bg-primary/10 px-3 py-1 rounded-full border border-primary/20">Absolute Savage</span>
+</div>
+<div class="relative flex h-10 w-full items-center">
+<!-- Custom Slider Track -->
+<div class="relative flex h-2 w-full items-center">
+<!-- Background Track -->
+<div class="absolute h-full w-full rounded-full bg-white/10"></div>
+<!-- Active Track (Purple) -->
+<div class="absolute h-full w-[85%] rounded-full bg-primary shadow-[0_0_15px_rgba(168,85,247,0.4)]"></div>
+<!-- Slider Thumb -->
+<div class="absolute left-[85%] -translate-x-1/2 flex items-center justify-center">
+<div class="size-7 rounded-full bg-white shadow-lg shadow-black/40 ring-4 ring-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg font-bold">bolt</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center px-1">
+<p class="text-[#ae90cb] text-sm font-medium">Friendly Buddy</p>
+<p class="text-white text-sm font-bold">Absolute Savage</p>
+</div>
+</div>
+</div>
+<!-- Preview Card -->
+<div class="mt-14 group">
+<p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-center">Preview of your Mate's commentary</p>
+<div class="relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-xl p-8 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/40">
+<!-- Subtle Glow Decoration -->
+<div class="absolute -top-12 -right-12 w-24 h-24 bg-primary/10 blur-[40px] rounded-full"></div>
+<div class="absolute -bottom-12 -left-12 w-24 h-24 bg-primary/10 blur-[40px] rounded-full"></div>
+<div class="relative flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">format_quote</span>
+<p class="text-white tracking-tight text-2xl font-semibold leading-[1.3] italic">
+                            "Three lava lamps? Even Austin Powers would say chill, mate."
+                        </p>
+<div class="flex items-center gap-2 mt-2">
+<div class="size-8 rounded-full bg-gradient-to-br from-primary to-purple-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Stylized minimalist avatar of a sarcastic digital assistant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ1v0prMkRChfAH1yaEghKYx8gdaCj3ZHDCVqJHWEZ6CDiAEdsPSkga4Ien4J0LYkhm1ebCYDHrxITJxpmh-Hfkb6C4Ei3cCmRC28oFBGBklBIxUkXm8Y0qpvwbr3wCTLvWmDuRsFP79LG0zg8TR57_i9unmHvtYhsuL97VPfKPhIr4cEXQRlauRVV638D36zwE7U3YFHaKL3VbGvvRhdSZQZUZUOGcv2l0GmMHAZPkvTB7FvJOxPAWN5zwglaeooeqRgVaG4pGSg"/>
+</div>
+<span class="text-white/50 text-xs font-medium italic">— Your Shopaholics Mate</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Navigation -->
+<footer class="p-6 pb-10 bg-gradient-to-t from-background-dark via-background-dark to-transparent">
+<button class="w-full bg-primary hover:bg-primary/90 text-white text-lg font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                Next Step
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-white/20 text-center text-[10px] mt-4 font-medium uppercase tracking-widest">Shopaholics Inc • Step 2 of 3</p>
+</footer>
+<!-- Background Decorative Element -->
+<div class="fixed top-[-10%] right-[-10%] w-[50%] h-[30%] bg-primary/5 blur-[100px] pointer-events-none rounded-full"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[50%] h-[30%] bg-primary/5 blur-[100px] pointer-events-none rounded-full"></div>
+</div>
+</body></html>

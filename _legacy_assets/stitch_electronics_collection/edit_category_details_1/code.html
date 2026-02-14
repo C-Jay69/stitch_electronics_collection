@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Category Details | Shopaholics Inc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .form-input:focus {
+            box-shadow: 0 0 0 1px #a855f7;
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden h-screen w-full flex items-center justify-center p-4">
+<!-- Background Overlay (Simulating the Category Manager behind) -->
+<div class="fixed inset-0 z-0 bg-background-dark/80 ios-blur flex flex-col p-6 pointer-events-none opacity-40">
+<div class="flex justify-between items-center mb-8">
+<div class="h-8 w-32 bg-gray-700 rounded"></div>
+<div class="h-10 w-10 bg-gray-700 rounded-full"></div>
+</div>
+<div class="space-y-4">
+<div class="h-20 bg-gray-800/50 rounded-xl border border-gray-700"></div>
+<div class="h-20 bg-gray-800/50 rounded-xl border border-gray-700"></div>
+<div class="h-20 bg-gray-800/50 rounded-xl border border-gray-700"></div>
+<div class="h-20 bg-gray-800/50 rounded-xl border border-gray-700"></div>
+</div>
+</div>
+<!-- Edit Category Modal -->
+<div class="relative z-10 w-full max-w-[440px] bg-[#111827] border border-[#334155] rounded-xl shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
+<!-- Header -->
+<div class="flex items-center justify-between p-5 border-b border-[#334155]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+<h2 class="text-xl font-bold tracking-tight">Edit Category</h2>
+</div>
+<button class="text-gray-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-5 space-y-6 overflow-y-auto">
+<!-- Category Name Input -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-300 uppercase tracking-wider">Category Name</label>
+<input class="form-input w-full rounded-lg bg-[#1a2236] border border-[#334155] text-white p-3 focus:outline-none focus:border-primary transition-all placeholder:text-gray-500" placeholder="e.g., Shiny Stuff" type="text" value="Automotive Accessories"/>
+</div>
+<!-- Slug Input -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-300 uppercase tracking-wider">Slug (URL)</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-gray-500 text-sm">shop.inc/</span>
+<input class="form-input w-full rounded-lg bg-[#1a2236] border border-[#334155] text-white p-3 pl-20 focus:outline-none focus:border-primary transition-all placeholder:text-gray-500" placeholder="slug-here" type="text" value="automotive-accessories"/>
+</div>
+</div>
+<!-- Upload Section -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-300 uppercase tracking-wider">Category Icon / Thumbnail</label>
+<div class="h-32 w-full rounded-lg border-2 border-dashed border-[#334155] bg-[#0f172a] flex flex-col items-center justify-center cursor-pointer hover:bg-[#1e293b] transition-colors group">
+<span class="material-symbols-outlined text-4xl text-gray-500 group-hover:text-primary mb-2">cloud_upload</span>
+<p class="text-xs text-gray-400">Tap to upload a representative image</p>
+</div>
+</div>
+<!-- Display Toggle -->
+<div class="flex items-center justify-between bg-[#1a2236] p-4 rounded-lg border border-[#334155]">
+<div class="flex flex-col">
+<span class="text-sm font-semibold">Display in Navigation</span>
+<span class="text-xs text-gray-500">Visible to shoppers in top menu</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Mate's Tip Box (Sarcastic Persona) -->
+<div class="bg-primary/5 border border-primary/20 rounded-lg p-4 flex gap-3">
+<span class="material-symbols-outlined text-primary shrink-0">tips_and_updates</span>
+<div class="space-y-1">
+<p class="text-xs font-bold text-primary uppercase">Mate's Tip</p>
+<p class="text-sm text-gray-300 leading-relaxed italic">
+                        "Keep it short. <span class="text-white font-medium">'Things for the Car'</span> is better than <span class="text-white font-medium">'Automotive Accessories and Various Mechanical Doohickeys'</span>. Humans have short attention spans."
+                    </p>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-5 bg-[#0f172a] border-t border-[#334155] flex gap-4">
+<button class="flex-1 px-4 py-3 rounded-lg border border-white text-white font-semibold hover:bg-white hover:text-black transition-all">
+                Cancel
+            </button>
+<button class="flex-[2] px-4 py-3 rounded-lg gradient-btn text-white font-bold shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all">
+                Save Category
+            </button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopaholics Inc: Saving &amp; Limits</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-300">
+<div class="relative mx-auto flex h-full min-h-screen max-w-[430px] flex-col overflow-x-hidden shadow-2xl border-x border-slate-200 dark:border-white/5">
+<!-- Top App Bar / Progress Header -->
+<header class="flex items-center px-6 py-6 justify-between sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 ios-blur">
+<button class="text-slate-900 dark:text-white flex items-center justify-center p-2 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex-1 text-center">
+<span class="text-xs font-bold uppercase tracking-widest text-primary">Step 3 of 3</span>
+</div>
+<div class="w-10"></div> <!-- Placeholder for balance -->
+</header>
+<main class="flex flex-col flex-1 px-6 pb-32">
+<!-- Hero Title -->
+<div class="pt-8 pb-10">
+<h1 class="text-[40px] font-bold leading-tight tracking-tight text-slate-900 dark:text-white">
+                    Keep your <br/>
+<span class="text-primary italic">wallet</span> happy
+                </h1>
+<p class="mt-4 text-slate-500 dark:text-slate-400 text-lg leading-relaxed max-w-[85%]">
+                    Our AI works harder than your impulse control. Let's set some boundaries.
+                </p>
+</div>
+<!-- Features Sections -->
+<div class="space-y-8">
+<!-- Toggle Card -->
+<div class="flex items-center gap-6 p-5 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10">
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl">magic_button</span>
+<p class="text-slate-900 dark:text-white text-lg font-semibold leading-tight">Auto-Suggest Dupes</p>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-relaxed">
+                            Save money without trying. It’s like magic, but with data.
+                        </p>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[32px] w-[56px] cursor-pointer items-center rounded-full bg-slate-200 dark:bg-white/10 p-1 has-[:checked]:bg-primary transition-colors duration-200">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="h-6 w-6 rounded-full bg-white shadow-md transform transition-transform duration-200 peer-checked:translate-x-6"></div>
+</label>
+</div>
+</div>
+<!-- Input Section -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-1">
+<label class="text-slate-900 dark:text-white text-lg font-semibold px-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">block</span>
+                            Set a Monthly Splurge Limit
+                        </label>
+<p class="text-slate-500 dark:text-slate-400 text-sm px-1 font-normal italic">
+                            Tell us when to cut you off.
+                        </p>
+</div>
+<div class="relative group">
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold text-slate-400 dark:text-white/30 group-focus-within:text-primary transition-colors">
+                            $
+                        </div>
+<input class="w-full pl-10 pr-6 py-5 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-2xl font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-slate-300 dark:placeholder:text-white/10" inputmode="numeric" placeholder="0.00" type="text"/>
+</div>
+</div>
+<!-- Sarcastic Insight -->
+<div class="mt-8 flex items-start gap-3 p-4 rounded-xl bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-normal">
+                        Pro tip: Setting this to zero won't actually stop you from dreaming about that designer bag, but it will make us feel superior when we judge you.
+                    </p>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Action Bar -->
+<footer class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-6 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/95 dark:via-background-dark/95 to-transparent">
+<button class="w-full flex items-center justify-center gap-2 h-16 rounded-2xl bg-gradient-to-r from-primary to-[#c084fc] text-white text-xl font-bold shadow-[0_8px_30px_rgb(168,85,247,0.4)] active:scale-[0.98] transition-all">
+<span>Let’s Go</span>
+<span class="material-symbols-outlined">rocket_launch</span>
+</button>
+<div class="mt-4 flex justify-center gap-2">
+<div class="h-1.5 w-1.5 rounded-full bg-slate-300 dark:bg-white/20"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-slate-300 dark:bg-white/20"></div>
+<div class="h-1.5 w-4 rounded-full bg-primary"></div>
+</div>
+</footer>
+<!-- iOS Home Indicator Emulation -->
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1.5 rounded-full bg-slate-200 dark:bg-white/20"></div>
+</div>
+</body></html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Electronics Collection | Shopaholics Inc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#111827",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300">
+<!-- iOS Status Bar Spacer -->
+<div class="h-12 w-full bg-background-light dark:bg-background-dark"></div>
+<!-- Top AppBar -->
+<nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3 flex items-center justify-between border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Electronics</h1>
+</div>
+<div class="flex items-center gap-1">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute top-1 right-1 size-4 bg-primary text-[10px] flex items-center justify-center rounded-full text-white font-bold">3</span>
+</button>
+</div>
+</nav>
+<main class="max-w-md mx-auto">
+<!-- Sarcastic Header Section -->
+<header class="px-4 py-6">
+<p class="text-lg font-medium leading-snug text-gray-600 dark:text-gray-400">
+                Buy things you <span class="italic text-primary">don't need</span> with money you <span class="italic text-primary">don't have</span>.
+            </p>
+</header>
+<!-- Subcategory Horizontal Scroll -->
+<div class="flex gap-2 px-4 pb-6 overflow-x-auto hide-scrollbar">
+<button class="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-primary text-white font-semibold text-sm shadow-lg shadow-primary/20">
+                All Junk
+            </button>
+<button class="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium text-sm">
+                Laptops
+            </button>
+<button class="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium text-sm">
+                Headphones
+            </button>
+<button class="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium text-sm">
+                Wearables
+            </button>
+<button class="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium text-sm">
+                Overpriced Silicons
+            </button>
+</div>
+<!-- Filter/Sort Bar -->
+<div class="px-4 flex items-center justify-between mb-4">
+<button class="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-lg">swap_vert</span>
+                Sort by: <span class="text-slate-900 dark:text-white">Most Debt-Inducing</span>
+</button>
+<button class="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                Price: <span class="text-slate-900 dark:text-white">Pocket Change</span>
+</button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-2 gap-4 px-4 pb-32">
+<!-- Product Card 1 -->
+<div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm flex flex-col group border border-transparent dark:border-gray-800">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-gray-800 overflow-hidden">
+<img alt="HyperBook Pro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern sleek laptop on a dark desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRPJtVNj5156oTlWBrdZzWW7CihjFFGo54mlTYJsiCRmaoHz1FxOk4tArBOY9xvyo_EYAWa-uE6wkG-EEIVjDAh4G4gDLjESLvzlnE1ldmlLQX2lQwpcYZyNLRsyxRDm5pF20Gma8AHUptiqNqWga33JsIw63rizccOOO3USIw0h4bhsa1-tvLQ0R6SJewZYhzqmg9H6x7JAWJUtrEeEXvPAUp8K1MM6W76kZe5NZXTwutave1DSLDwekD8NCsMjruycJlatCOnvI"/>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/40 backdrop-blur rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h3 class="font-bold text-sm mb-1 line-clamp-1">HyperBook Pro M3</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Battery lasts 2 minutes.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-base">$2,499</span>
+<button class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 (With Badge) -->
+<div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm flex flex-col group border border-transparent dark:border-gray-800">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-gray-800 overflow-hidden">
+<img alt="QuietBlast Gen 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Professional wireless black over-ear headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrBszxEua6T8vqi_S9NHl6fxUTc5GBGW-tmrbiLtko-aimiWcWU1Fw_XgUhVBQdffSTwVBeyZnB5iHZ8Uxnt6Wnlt76r2zn4zvWl9U3FLQKNmpwIGkUR1uN3wDjbgrpYRGyNShu0_gqBl5eis78AeVLmkr5GSXVyEmpb94peEsfG91s8IzB8I-R8JifWmbAqrgawkweXD64umTmZ0jZlP9eSeKrvAMYNgxs8UQyAQORk6kNm4zASnnzFtnNUsI-z1-CGcI542Hv20"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-primary text-[10px] font-bold text-white rounded uppercase tracking-wider">
+                        Mate's Tip
+                    </div>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/40 backdrop-blur rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h3 class="font-bold text-sm mb-1 line-clamp-1">QuietBlast Gen 2</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Actually affordable, weirdly.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-base">$129</span>
+<button class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm flex flex-col group border border-transparent dark:border-gray-800">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-gray-800 overflow-hidden">
+<img alt="PulseWatch X" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern smart watch with white band" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoP_0jqGIDsfkortv27yJl6b5sscetgp5BL5IBWmmI4__82Mmgox444LhElhSjjckChVmVOVnI39FazPPc0FrWVC2baTWimkTvROb38D5WrNVMOBxSrFUMwLvdr0G59Vgn8KIL9XTnvi_5k-JWXzxYH4nUiooqxW_RiYpjPjKjUkSbFlDwwPz2E0plwmPDKc2WyQNWT602L_Y8JCStpfKIv2_ESBeZ-z3zA31ekVYlsC-5S03Hg01TzG91Jxx7bq51vvznFcgZZFU"/>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/40 backdrop-blur rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-lg text-primary fill-1">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h3 class="font-bold text-sm mb-1 line-clamp-1">PulseWatch X</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Tracks steps to the fridge.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-base">$399</span>
+<button class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm flex flex-col group border border-transparent dark:border-gray-800">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-gray-800 overflow-hidden">
+<img alt="AirBuds Lite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="White wireless earbuds and charging case" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADfuAL2hm9EkXZgYGX3nfmYMvmHTcuxiHAi0fz4pjk-NfTqjO6dBPCffQCaoMNatN63u4IYNViHZuj8WxsrafnmmTLc4DOu973gyDmcTw50gd3MLKAXxnYHhXVulrfEyZwSeggIxPIBF-lYaHYMnr3b1dhLAkmYGJLMgw13kI8J4nn0Il5GWeFPDlA4iWIhSWJzyy5RMLurvI42_7-2sTav9b6Wuqdfq2SparS1ZzHqtz_7NwTdmk2UGkl2uRiByeMjsHT6b4Pheg"/>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/40 backdrop-blur rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h3 class="font-bold text-sm mb-1 line-clamp-1">AirBuds Lite</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Easy to lose, hard to find.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-base">$89</span>
+<button class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 (Special Deal) -->
+<div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm flex flex-col group border border-transparent dark:border-gray-800">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-gray-800 overflow-hidden">
+<img alt="Pro Display" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Premium computer monitor on desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLyltfda8ocLUG0n_A10ysWvj-uvWgWZa85b_eujU7_zq5HNwUi7PeUl3EIFUwm86m8XZELoOUBioFBUTDfjWj-_moPmh88RGGSzLY4Ecg3saISctOLD0LtCvQz4pOXqtTTnmCAoMxKxdQXvAkmTG7PmrQ581xZFHjahw9dQiJ-mWoH2WE2JOLrP5iUtrzvLGpMKv69sMfD7Q3IrhNrTr6ox548zOgNnWuz2LKtU-8zeJRFkpcqlAvULF4eIpmMEV40Fs9ICFqzm4"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-red-500 text-[10px] font-bold text-white rounded uppercase tracking-wider">
+                        Influence Bait
+                    </div>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h3 class="font-bold text-sm mb-1 line-clamp-1">Infinity Screen 32"</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Requires selling a kidney.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-base">$5,999</span>
+<button class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm flex flex-col group border border-transparent dark:border-gray-800">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-gray-800 overflow-hidden">
+<img alt="Gaming Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="RGB gaming mouse with honeycomb design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHwrNH_Rz1v-slKtUKqOk_NqYlE8XH2cRFjjjCOEmWXYhOuX-jWR9rXQn1NHhJ0-7ExBPkqpokHw2yocRJhJSCwLPlLLMi05RnT2VWRCHHgzZXQK20-PRIYgVXkp4bdXoBAC1x3uTtfrouwbPCgbtXw-8yYJIzJ25W3JKXCNbORHZl4idqQy0ogLhO1ZgHA2-6u1Ck-j3vCrtf1kzYOPc8zXN6zLfppCvPENowGYcTqKzsnZz28OZyteFRRu4qQX3cch7ZqhNxApw"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-primary text-[10px] font-bold text-white rounded uppercase tracking-wider">
+                        Mate's Tip
+                    </div>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h3 class="font-bold text-sm mb-1 line-clamp-1">ClickMaster RGB</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-2">More lights than skill.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-base">$45</span>
+<button class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button: Filter the Madness -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+<button class="flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full font-bold shadow-2xl hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">tune</span>
+<span>Filter the Madness</span>
+</button>
+</div>
+<!-- Bottom Tab Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 flex justify-around items-center py-2 px-6 pb-8 z-40">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Shop</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] font-bold">Categories</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px] font-bold">Vibe</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Regrets</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Witty Search &amp; Suggestions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-dark": "#000000",
+                        "surface-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            min-height: 100dvh;
+        }
+        .search-focus:focus-within {
+            @apply ring-2 ring-primary ring-opacity-50;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-dark text-white overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col bg-background-dark">
+<div class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md">
+<div class="h-12 w-full flex items-center justify-between px-8 pt-4">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[18px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<div class="px-6 py-4">
+<div class="relative flex items-center bg-surface-dark border border-white/10 rounded-2xl px-4 h-14 search-focus transition-all">
+<span class="material-symbols-outlined text-slate-400 mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-white placeholder-slate-500 w-full text-lg font-medium" type="text" value="headphones"/>
+<button class="p-1">
+<span class="material-symbols-outlined text-slate-400 text-xl">close</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-6 mt-2">
+<div class="space-y-1">
+<div class="flex items-center justify-between py-4 border-b border-white/5 group">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-slate-500 mr-4 text-xl">history</span>
+<span class="text-white text-base">Wireless <span class="text-primary font-bold">Headphones</span></span>
+</div>
+<span class="material-symbols-outlined text-slate-600 -rotate-45 text-lg">arrow_forward</span>
+</div>
+<div class="flex items-center justify-between py-4 border-b border-white/5">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-slate-500 mr-4 text-xl">trending_up</span>
+<span class="text-white text-base">Gaming <span class="text-primary font-bold">Headphones</span></span>
+</div>
+<span class="material-symbols-outlined text-slate-600 -rotate-45 text-lg">arrow_forward</span>
+</div>
+<div class="flex items-center justify-between py-4 border-b border-white/5">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-slate-500 mr-4 text-xl">psychology</span>
+<span class="text-white text-base"><span class="text-primary font-bold">Headphones</span> that actually fit</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 -rotate-45 text-lg">arrow_forward</span>
+</div>
+</div>
+</div>
+<div class="mt-10 px-6 pb-24">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h2 class="text-xl font-extrabold tracking-tight">Mate's Quick Picks</h2>
+<p class="text-xs text-slate-500 italic mt-0.5">Everyone's buying these, for some reason.</p>
+</div>
+<button class="text-primary text-sm font-semibold">View all</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-dark rounded-2xl overflow-hidden border border-white/5">
+<div class="aspect-square bg-white/5 relative flex items-center justify-center p-4">
+<div class="absolute top-2 left-2 bg-primary px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Cheap choice</div>
+<img alt="Product" class="w-full h-full object-contain mix-blend-lighten opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcPrXtco2tuEJaODx74citVDTZOjgMqRxQXg53Czmgd1JE2QkfwfO-xvyXdypJbdBP7kEZtQCekDBSgncES2ilB69zKeDbxjbOMbTxjgJnN-E1FtsAyEBsrTh73XfZJkKonK-XYIGtwcQuEzPaOPzwlqMb8yS4evulJgkhrkSL1CITUQvoHgDT9ldz9p72BEKAs4vHjAE0w1mwRZgeCyLhY7W7gh6W0F8T17o0xrioE96E-fEMhugGErCr3Tz3LtQEJ2USsmSalJ0"/>
+</div>
+<div class="p-3">
+<h3 class="font-bold text-sm truncate">Over-Ear Decent-ish</h3>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-primary font-black">$29.99</span>
+<span class="text-[10px] text-slate-500 line-through">$89.99</span>
+</div>
+<button class="w-full mt-3 py-2 bg-white/5 hover:bg-white/10 text-white text-xs font-bold rounded-lg transition-colors">Snag it</button>
+</div>
+</div>
+<div class="bg-surface-dark rounded-2xl overflow-hidden border border-white/5">
+<div class="aspect-square bg-white/5 relative flex items-center justify-center p-4">
+<div class="absolute top-2 left-2 bg-white/10 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Just okay</div>
+<img alt="Product" class="w-full h-full object-contain mix-blend-lighten opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjjovq4nmyMyIu0MB5fsMg4geYYQZ9uT1tJ-nYE6gsBwi8LUJnAcRNwcWKbh4xBqnAYNk8v0lnkQpU8HCUqjk22wmdzEZA829T7dZgLJz__pltdzL43iU9F_y-gi111igaW2A_-82aO6azRc5-3TJSBUliUGbO_EXovYePuOgJzaIzgAK_ic7iHEMFcfBd4pbuFKfq4eIgCHntQKXh5taodg8NCcilPZh9boJgin5Jz-JM_m5mFDcYfx0aQ21n5AokHep_3nxQPHA"/>
+</div>
+<div class="p-3">
+<h3 class="font-bold text-sm truncate">Generic Audio Bliss</h3>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-primary font-black">$19.50</span>
+<span class="text-[10px] text-slate-500 line-through">$45.00</span>
+</div>
+<button class="w-full mt-3 py-2 bg-white/5 hover:bg-white/10 text-white text-xs font-bold rounded-lg transition-colors">Why not?</button>
+</div>
+</div>
+</div>
+<div class="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-2xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-sm text-slate-300 leading-snug">
+<span class="font-bold text-white">Pro Tip:</span> If you search for 'happiness', you'll just get results for more coffee makers.
+                </p>
+</div>
+</div>
+<div class="fixed bottom-0 left-0 right-0 h-8 bg-background-dark/80 backdrop-blur-md flex justify-center items-center">
+<div class="w-32 h-1 bg-white/20 rounded-full"></div>
+</div>
+</div>
+
+</body></html>

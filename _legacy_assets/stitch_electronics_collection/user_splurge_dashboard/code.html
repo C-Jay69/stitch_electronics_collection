@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Splurge Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#121212",
+                        "border-dark": "#2a2a2a"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 0px;
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-12 w-full bg-background-light dark:bg-background-dark"></div>
+<main class="max-w-md mx-auto min-h-screen pb-24 px-4">
+<!-- Header -->
+<header class="pt-4 pb-6">
+<div class="flex justify-between items-start mb-2">
+<h1 class="text-3xl font-bold leading-tight tracking-tight">
+                    Your past splurges,<br/>in all their glory
+                </h1>
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-slate-200 dark:bg-card-dark border border-transparent dark:border-border-dark">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</button>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm italic">"Your bank account called. It's not mad, just disappointed."</p>
+</header>
+<!-- Bento Grid Section -->
+<div class="grid grid-cols-2 gap-3 mb-8">
+<!-- Recent Order Card -->
+<div class="col-span-2 p-4 rounded-xl bg-slate-100 dark:bg-card-dark border border-slate-200 dark:border-border-dark flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-14 h-14 rounded-lg bg-cover bg-center" data-alt="Red designer sneaker on dark background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDsRLrK2rKjtROgbTM30xvohdbAjfSxcLFFf1sDazYlHfv_9UJJVqZWpqJmMcSbQY3zdtfj57faWw8XTkb6OTOQNaE8n7q8uXnhstqm0Kb0NceR1sfrx9lfcsMu7V1r3jQ6dqN1_ZuXb1UkBAMlqYCRmqVBF44xRkeGdQ1zOgfxZa4NUy7tVbgL3Hnb4nDt1Axxs8JUFUxH11LRV_8nONDl4JRj2xttFKMhmPPh0YgrPwqS5jthalOD11fx5OGeUzfBo63Re8LmkGg')"></div>
+<div>
+<h3 class="font-bold text-sm">Last Regret</h3>
+<p class="text-xs text-slate-500">Designer Sneakers</p>
+<p class="text-[10px] text-primary mt-1 font-bold uppercase tracking-wider">Arriving Today</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<!-- Wishlist Card -->
+<div class="p-4 rounded-xl bg-slate-100 dark:bg-card-dark border border-slate-200 dark:border-border-dark flex flex-col justify-between aspect-square">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-3xl fill-1">heart_check</span>
+<span class="text-xs font-bold text-slate-500">12 Items</span>
+</div>
+<div>
+<h3 class="font-bold text-sm leading-tight">Wishlist</h3>
+<p class="text-[10px] text-slate-400 mt-1">Save it for when you’re feeling flush.</p>
+</div>
+</div>
+<!-- Addresses Card -->
+<div class="p-4 rounded-xl bg-slate-100 dark:bg-card-dark border border-slate-200 dark:border-border-dark flex flex-col justify-between aspect-square">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+</div>
+<div>
+<h3 class="font-bold text-sm leading-tight">Delivery Hubs</h3>
+<p class="text-[10px] text-slate-400 mt-1">Where to ship the evidence.</p>
+</div>
+</div>
+</div>
+<!-- Mate Settings Section -->
+<section class="mb-8 p-5 rounded-xl bg-primary/10 border border-primary/20">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+<h2 class="text-lg font-bold">Mate Settings</h2>
+</div>
+<!-- AI Coach Toggle -->
+<div class="flex items-center justify-between mb-6 p-3 rounded-lg bg-white/5 border border-white/5">
+<div>
+<p class="font-semibold text-sm italic">Impulse Coach "Judgment Mode"</p>
+<p class="text-[10px] text-slate-400">Enables sarcastic alerts during checkout.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Budget Limit Tracker -->
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<label class="text-sm font-bold">Monthly Spending Cap</label>
+<span class="text-sm font-bold text-primary">$1,200 / $1,500</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-white/10 rounded-full h-4 overflow-hidden">
+<div class="bg-primary h-full w-[80%] rounded-full relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+</div>
+</div>
+<div class="flex justify-between">
+<p class="text-[11px] font-bold text-primary uppercase tracking-tighter">Current Mood: Eating Ramen</p>
+<p class="text-[10px] text-slate-400">Reset in 12 days</p>
+</div>
+</div>
+</section>
+<!-- Past Regrets Grid -->
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4 px-1">Historical Evidence</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-2 relative">
+<img alt="Sleek modern wrist watch on minimalist background" class="w-full h-full object-cover" data-alt="Minimalist luxury wrist watch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBg9kagp7__FDBDRDtQ-IDil1l2YR-pc69D61aFNjV7TsEGOyxtlxoQraYfkrUI4GHIHcKusuYCabBoXIxY8Zbdtrwnxo2T4-ru7HfPny-gUGqPoqKRGZykxyHcVBx_MZowRCPojanjInDG8Vx55VrBBAbhrg-hpDcJk41ExrExxTIusB1zyYr-AGE4J8vozRQqBSzmWZPMAH3okLN1OoXPcwmsBmjOG8g0Wo1gke0iT1ZBeH1JTVtiHPs2isH9tQKY4Y4y_eVA80"/>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md">
+<span class="text-[10px] font-bold text-white">$450</span>
+</div>
+</div>
+<p class="text-xs font-bold truncate">Timepiece for no dates</p>
+<p class="text-[10px] text-slate-500 italic">Purchased 3 weeks ago</p>
+</div>
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-2 relative">
+<img alt="Professional studio headphones on minimalist stand" class="w-full h-full object-cover" data-alt="Premium black studio headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuZn23_i2IJ04MAKAbpUVwZ_GhOlTKgiShXSYMoe1cletYWeYfIMlU-ou6mS8UtQmAOmOD4jt2jqJrBVRXI5tRe8zzLWMuSyX_jVnQQOEhPe4aPRcbovwiGUo0HsRskpwBEuTVLxVsBOnUHnQD0QRzl8wGsYIOPr8FOTP61FRWvvGkDJ3S9to-unwAY_jt-hOUF51iKMNugIJVXJZZtz2Mz0PgKgtZX3kNIjQHbOSPm7zuV6jsdWKIVjvZEedOOFzHt4sKEy_ykkg"/>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-md">
+<span class="text-[10px] font-bold text-white">$299</span>
+</div>
+</div>
+<p class="text-xs font-bold truncate">Silence-the-conscience buds</p>
+<p class="text-[10px] text-slate-500 italic">Purchased last month</p>
+</div>
+</div>
+<!-- Footer / Danger Zone -->
+<div class="mt-12 mb-6 text-center">
+<button class="text-slate-500 hover:text-red-400 transition-colors text-xs font-medium uppercase tracking-widest">
+                Delete my wallet's existence
+            </button>
+</div>
+</main>
+<!-- iOS Style Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-200 dark:border-border-dark px-8 py-4 z-50">
+<div class="flex justify-between items-center">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-1">person</span>
+<div class="w-1 h-1 bg-primary rounded-full"></div>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="mt-4 flex justify-center">
+<div class="w-32 h-1 bg-slate-300 dark:bg-white/20 rounded-full"></div>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Orders Management | Shopaholics Inc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#0f0914",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">menu</span>
+<h1 class="text-xl font-bold tracking-tight">Orders</h1>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-primary text-[10px] items-center justify-center text-white">3</span>
+</span>
+</div>
+</div>
+</header>
+<main class="max-w-md mx-auto pb-24">
+<!-- Header Copy -->
+<div class="px-4 py-6">
+<h2 class="text-2xl font-bold leading-tight">Keep the punters happy, yeah?</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Or at least stop them from emailing us.</p>
+</div>
+<!-- Sidebar-style Pending Actions Card -->
+<div class="px-4 mb-6">
+<div class="bg-primary/10 border border-primary/20 rounded-xl p-5 flex items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-primary font-bold text-sm uppercase tracking-wider">Pending Actions</p>
+<p class="text-slate-700 dark:text-slate-200 font-medium">24 unfulfilled orders - move it!</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all shrink-0">
+                    Fix it
+                </button>
+</div>
+</div>
+<!-- Search & Filters -->
+<div class="px-4 space-y-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-base transition-all shadow-sm" placeholder="Search for orders or drama..." type="text"/>
+</div>
+<!-- Tab Filter -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+<button class="bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap shadow-md shadow-primary/20">All Orders</button>
+<button class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Pending</button>
+<button class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Shipped</button>
+<button class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Delivered</button>
+</div>
+</div>
+<!-- Orders List -->
+<div class="mt-6 space-y-4 px-4">
+<!-- Order Card 1: Pending -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+<div>
+<h3 class="font-bold text-base">#8492 — Impulsive Ivan</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Ordered 2 mins ago • $1,200.00 (Ouch)</p>
+</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 rounded">Pending</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 py-2.5 rounded-lg text-sm font-bold transition-colors">Archive</button>
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-1 shadow-lg shadow-primary/10">
+                        View Drama <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Order Card 2: Shipped -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<h3 class="font-bold text-base">#8488 — Desperate Debbie</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Shipped 4h ago • $45.99</p>
+</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 rounded">Shipped</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 py-2.5 rounded-lg text-sm font-bold transition-colors">Track</button>
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-1">
+                        View Drama <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Order Card 3: Delivered -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<div>
+<h3 class="font-bold text-base">#8475 — Karen The Caller</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Arrived Yesterday • $320.00</p>
+</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 rounded">Delivered</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 py-2.5 rounded-lg text-sm font-bold transition-colors">Receipt</button>
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-1">
+                        View Drama <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Empty State Subtle -->
+<div class="py-8 text-center">
+<p class="text-slate-400 dark:text-slate-600 text-sm">That's all the drama for now.</p>
+<p class="text-slate-400 dark:text-slate-600 text-xs mt-1 italic">Go grab a coffee, you've earned it.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 px-6 py-2 pb-8">
+<div class="max-w-md mx-auto flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Orders</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Stock</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Punters</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Chaos</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Floating Action Button -->
+<div class="fixed bottom-24 right-4">
+<button class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-xl shadow-primary/40 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+</body></html>

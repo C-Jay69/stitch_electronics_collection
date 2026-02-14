@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Streamlined Checkout | Shopaholics Inc.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        input:focus {
+            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased">
+<!-- Main Container -->
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-[430px] mx-auto bg-background-light dark:bg-background-dark border-x border-slate-200 dark:border-white/5">
+<!-- Header -->
+<header class="flex items-center px-6 pt-12 pb-4 justify-between sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur">
+<button class="flex size-10 items-center justify-center rounded-full bg-white/10 dark:hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-white">arrow_back_ios_new</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight text-white">Checkout</h1>
+<div class="size-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Progress Stepper -->
+<div class="flex w-full flex-row items-center justify-center gap-6 py-6 px-10">
+<div class="flex flex-col items-center gap-2">
+<div class="h-2.5 w-12 rounded-full bg-primary shadow-[0_0_12px_rgba(168,85,247,0.5)]"></div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary">Shipping</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="h-2.5 w-12 rounded-full bg-white/10"></div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-slate-500">Payment</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="h-2.5 w-12 rounded-full bg-white/10"></div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-slate-500">Review</span>
+</div>
+</div>
+<!-- Scrollable Form Area -->
+<main class="flex-1 overflow-y-auto px-6 pb-32 space-y-8">
+<!-- Branding/Copy -->
+<section class="pt-2">
+<h2 class="text-3xl font-bold leading-tight">Where to?</h2>
+<p class="text-slate-400 text-sm mt-2 font-medium">
+                    Shipping: We’re quick, but we’re not <span class="text-primary italic">Star Trek</span> beaming yet.
+                </p>
+</section>
+<!-- Form Fields -->
+<form class="space-y-6">
+<div class="space-y-4">
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1">The Human's Name</label>
+<input class="w-full bg-transparent border-2 border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-slate-600 focus:border-primary focus:ring-0 transition-all duration-300 outline-none" placeholder="John 'Spends-too-much' Doe" type="text"/>
+</div>
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1">Destination Base</label>
+<input class="w-full bg-transparent border-2 border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-slate-600 focus:border-primary focus:ring-0 transition-all duration-300 outline-none" placeholder="123 Shopping Addiction Lane" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1">Postcode</label>
+<input class="w-full bg-transparent border-2 border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-slate-600 focus:border-primary focus:ring-0 transition-all duration-300 outline-none" placeholder="90210" type="text"/>
+</div>
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 ml-1">City</label>
+<input class="w-full bg-transparent border-2 border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-slate-600 focus:border-primary focus:ring-0 transition-all duration-300 outline-none" placeholder="Lost Angeles" type="text"/>
+</div>
+</div>
+</div>
+<!-- Secure Integration Badge -->
+<div class="bg-white/5 rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-400 text-xl">verified_user</span>
+<div>
+<p class="text-[10px] uppercase tracking-tighter font-bold text-slate-400 leading-none">Powered by</p>
+<p class="text-sm font-bold text-white">Stripe Security</p>
+</div>
+</div>
+<div class="flex gap-2 opacity-60 grayscale hover:grayscale-0 transition-all">
+<img alt="" class="h-3" data-alt="Visa logo minimalist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeZjDMeGX-K2i1EDBMQTyokWiRib7LBUkPK7Kh5LVxZemys6HuwWaqw4KdBjrTQuyfaTOlKXdYQLhjr4xAGh15B4OtjJKiSLR0-xLpiAS9oNNpRoZEzmIy7htrnUtnx0AqrvSmplyDg1gmuLy-8sbyQgIXZmFW_z6TbuyDDp-xZz0Kh52ckYfvjE3jIr62tbmOZRU3LvmTaZ-DFVMsKTopBJGJtPJQB5uCQF1ub7VFypEZ4B_2Pa0UyZhnVGiw9-WJFmekz4SiAA0"/>
+<img alt="" class="h-3" data-alt="Mastercard logo minimalist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCouJJdPnCkvGas0feXBtheNCawmAX1pBH2HGn-fDIfp_nvADx_IkJeUwPd3Qng60UK-rihM-9rvP23TiqxE5i-HmRibNtaDUH8lGbrrjFiuI0n9-hrnBAI3fXPpm-AiUmUEzUdUI7KpAcFg1NDTJpH5FV1J2j-NKrIvd08Mi9IWlR5NhhFzfskEJY_FANn4EHCsmtg9Dt6QnfwfLINH3IKoIeK5cZfda56EfYDFj9PszSKgCSkaUKasN-VQR511zkP-wV7w3HMva8"/>
+<img alt="" class="h-3" data-alt="Apple Pay logo minimalist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo2vldN8NEuzFst0XQs8v6dd-BDwO8uV4P8vo8rDtVNiXew-os-RU67v_AS__qBKzTmLWyTqQ8aBSwIKS7CdGgzmSxaZ7R1dW_xEPMHWTXJP_JLE4KkuiyLODD_iCBHD6kOkivf50-OGs4j2EZ1ao47l_hC9VVQ7Z0_Cg8V6epZVZ6PBcxFZWE45w1hesonJso3ozsjw1PW5UVXYN0YDl_cNoSCuUp1eBRAJaWl2PuoSMV_rzlDGaNJQDhdcU73tb64-BF5HVB3dw"/>
+</div>
+</div>
+</form>
+<!-- Order Preview Card -->
+<div class="p-5 border-2 border-dashed border-white/10 rounded-2xl space-y-3">
+<div class="flex justify-between items-center">
+<p class="text-sm font-medium text-slate-400">3 Items in Bag</p>
+<p class="text-sm font-bold text-white">$1,299.00</p>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-sm font-medium text-slate-400">Shipping (Warp Speed)</p>
+<p class="text-sm font-bold text-emerald-400">FREE</p>
+</div>
+<hr class="border-white/5 my-2"/>
+<div class="flex justify-between items-center">
+<p class="text-lg font-bold text-white">Total</p>
+<p class="text-2xl font-bold text-primary">$1,299.00</p>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<div class="absolute bottom-0 left-0 right-0 p-6 pb-10 bg-gradient-to-t from-background-dark via-background-dark to-transparent">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold text-lg py-5 rounded-xl shadow-[0_8px_30px_rgb(168,85,247,0.3)] transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+                Continue to Payment
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-center text-[11px] text-slate-500 mt-4 font-medium uppercase tracking-widest">
+                Safe. Secure. Mostly Legal.
+            </p>
+</div>
+</div>
+<!-- Background Elements -->
+<div class="fixed top-[-10%] right-[-10%] w-[300px] h-[300px] bg-primary/20 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-5%] left-[-5%] w-[250px] h-[250px] bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none -z-10"></div>
+</body></html>

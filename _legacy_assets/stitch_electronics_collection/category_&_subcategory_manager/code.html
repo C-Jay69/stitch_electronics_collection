@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Category &amp; Subcategory Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#1a1a1a",
+                        "border-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .drag-handle {
+            cursor: grab;
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex justify-center">
+<!-- Mobile Container (Simulating iOS) -->
+<div class="relative w-full max-w-md min-h-screen bg-background-light dark:bg-background-dark overflow-hidden flex flex-col border-x border-slate-200 dark:border-border-dark">
+<!-- Header -->
+<header class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-5 pt-8 pb-4">
+<div class="flex justify-between items-start">
+<div>
+<h1 class="text-2xl font-bold tracking-tight">Organize the Chaos</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Keep the aisles tidy, mate.</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-card-dark text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</header>
+<!-- Main Action Area -->
+<div class="px-5 py-4">
+<button class="w-full h-14 bg-gradient-to-r from-primary to-blue-600 hover:to-blue-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Add Main Category</span>
+</button>
+</div>
+<!-- Scrollable List Content -->
+<main class="flex-1 px-5 pb-24 overflow-y-auto space-y-4">
+<!-- Category Item 1 (Expanded) -->
+<div class="bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-border-dark overflow-hidden">
+<div class="p-4 flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 drag-handle">drag_indicator</span>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">devices</span>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-base">Electronics</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">3 Subcategories</p>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+<button class="p-1 text-slate-400">
+<span class="material-symbols-outlined">expand_less</span>
+</button>
+</div>
+</div>
+<!-- Subcategories List -->
+<div class="bg-slate-50/50 dark:bg-black/40 border-t border-slate-100 dark:border-border-dark py-2">
+<div class="flex items-center justify-between px-4 py-3 ml-12 border-b border-slate-100 dark:border-border-dark/50">
+<span class="text-sm font-medium">Smartphones</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">edit</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">delete</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-4 py-3 ml-12 border-b border-slate-100 dark:border-border-dark/50">
+<span class="text-sm font-medium">Laptops</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">edit</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">delete</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-4 py-3 ml-12">
+<button class="text-primary text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                            Add Subcategory
+                        </button>
+</div>
+</div>
+</div>
+<!-- Category Item 2 -->
+<div class="bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-border-dark p-4 flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 drag-handle">drag_indicator</span>
+<div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-pink-500">apparel</span>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-base">Fashion</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">12 Subcategories</p>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-slate-400">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Category Item 3 -->
+<div class="bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-border-dark p-4 flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 drag-handle">drag_indicator</span>
+<div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-500">chair</span>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-base">Home Decor</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">5 Subcategories</p>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-slate-400">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Category Item 4 -->
+<div class="bg-white dark:bg-card-dark rounded-xl border border-slate-100 dark:border-border-dark p-4 flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 drag-handle">drag_indicator</span>
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-500">face</span>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-base">Beauty</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">8 Subcategories</p>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-slate-400">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Sarcastic Warning Card -->
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-5 border border-primary/20 mt-8 relative overflow-hidden group">
+<div class="flex gap-4 relative z-10">
+<span class="material-symbols-outlined text-primary">warning</span>
+<div class="space-y-1">
+<p class="text-sm font-medium text-primary">Admin Warning</p>
+<p class="text-sm text-slate-600 dark:text-slate-300 italic">"Don't make too many categories or users will get dizzy. Nobody likes a maze."</p>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-8xl text-primary">psychology_alt</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (iOS Style) -->
+<nav class="absolute bottom-0 w-full h-20 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-slate-200 dark:border-border-dark flex items-center justify-around px-6">
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Dash</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">category</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Cats</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Stock</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Config</span>
+</div>
+</nav>
+<!-- Dynamic Home Indicator -->
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-400/30 dark:bg-white/20 rounded-full"></div>
+</div>
+</body></html>

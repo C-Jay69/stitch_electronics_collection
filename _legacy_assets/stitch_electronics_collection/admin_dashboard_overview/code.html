@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopaholics Inc. Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#0a0510",
+                        "surface-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .stats-gradient-border {
+            background: linear-gradient(#191022, #191022) padding-box,
+                        linear-gradient(to bottom right, #a855f7, transparent) border-box;
+            border: 1px solid transparent;
+        }
+        .glass-panel {
+            background: rgba(25, 16, 34, 0.8);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Header Section -->
+<header class="sticky top-0 z-40 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 px-4 py-4 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<button class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">menu_open</span>
+</button>
+<div>
+<h1 class="text-sm font-bold tracking-tight text-primary uppercase">Shopaholics Inc.</h1>
+<p class="text-[10px] text-slate-500 dark:text-slate-400">Admin Command Center</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-10 w-10 rounded-full border-2 border-primary/30 p-0.5">
+<img alt="Admin Avatar" class="h-full w-full rounded-full bg-surface-dark" data-alt="Minimalist avatar of the admin user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHPp8hNmE16F5z3UhUYMotYsAmLY8VEE1EW0dqwcfH74s87tTUMQ5puBooZHodzlVW-MDgzdqHhwx2H0sQA7MtsTmukMYXMf-nerZ3Mg50lXh0h41c5HMgOeHQswQ87Z_-nYxu40xIOOtZDikMW23vF8O8lxh7Id49nrjZVwHXMWOfgNMmn9t3v__JgTd7Va_6TcHpCP3X2KH1uO2VcIPCcjArGLy_juT1fYs0dzlnHrjXuThE13tQxxOg-UcSVRvu2755badIlac"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 pb-24">
+<!-- Cheeky Welcome Message -->
+<div class="mb-8 mt-4">
+<h2 class="text-2xl font-bold leading-tight tracking-tight">
+                    Congrats, you’re basically running <span class="text-primary underline decoration-primary/30">Amazon</span> now.
+                </h2>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Fueling addictions for 12,500+ active enablers today.</p>
+</div>
+<!-- Quick Stats Grid -->
+<section class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">Quick Stats</h3>
+<span class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-bold">LIVE</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Total Splurges -->
+<div class="stats-gradient-border flex flex-col gap-1 rounded-xl p-4 bg-surface-dark">
+<span class="material-symbols-outlined text-primary text-xl">payments</span>
+<p class="text-[10px] font-medium text-slate-400">Total Splurges</p>
+<p class="text-xl font-bold leading-none">$4.2M</p>
+<p class="text-[10px] font-bold text-emerald-500">+12% <span class="text-slate-500 font-normal">vs last week</span></p>
+</div>
+<!-- Active Shoppers -->
+<div class="stats-gradient-border flex flex-col gap-1 rounded-xl p-4 bg-surface-dark">
+<span class="material-symbols-outlined text-primary text-xl">groups</span>
+<p class="text-[10px] font-medium text-slate-400">Active Shoppers</p>
+<p class="text-xl font-bold leading-none">12.5K</p>
+<p class="text-[10px] font-bold text-emerald-500">+5.2% <span class="text-slate-500 font-normal">growing fast</span></p>
+</div>
+<!-- Success Rate -->
+<div class="col-span-2 stats-gradient-border flex items-center justify-between rounded-xl p-4 bg-surface-dark">
+<div>
+<p class="text-[10px] font-medium text-slate-400">Impulse Coach Success Rate</p>
+<p class="text-2xl font-bold">84.2%</p>
+</div>
+<div class="relative flex h-12 w-12 items-center justify-center">
+<svg class="absolute inset-0 h-full w-full" viewbox="0 0 36 36">
+<path class="stroke-primary/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="stroke-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="84, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<span class="text-[10px] font-bold text-primary">84%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Impulse Coach Analytics -->
+<section class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">Impulse Coach Analytics</h3>
+<button class="text-[10px] font-bold text-primary flex items-center gap-1">
+                        VIEW REPORT <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+<div class="rounded-xl bg-surface-dark border border-white/5 p-4 overflow-hidden relative">
+<p class="text-sm font-medium mb-1">User Savings Growth</p>
+<p class="text-xs text-slate-500 mb-6">Convincing people they're broke since 2024.</p>
+<!-- Simplified Line Graph Placeholder -->
+<div class="relative h-40 w-full">
+<svg class="h-full w-full" preserveaspectratio="none" viewbox="0 0 400 150">
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#a855f7" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,130 C50,120 80,140 120,90 C160,40 200,70 240,40 C280,10 320,50 400,20 L400,150 L0,150 Z" fill="url(#chartGradient)"></path>
+<path d="M0,130 C50,120 80,140 120,90 C160,40 200,70 240,40 C280,10 320,50 400,20" fill="none" stroke="#a855f7" stroke-linecap="round" stroke-width="3"></path>
+<!-- Dots -->
+<circle cx="120" cy="90" fill="#a855f7" r="4"></circle>
+<circle cx="240" cy="40" fill="#a855f7" r="4"></circle>
+<circle cx="400" cy="20" fill="#a855f7" r="4"></circle>
+</svg>
+<div class="absolute top-0 right-0 rounded bg-primary px-2 py-1 text-[10px] font-bold text-white shadow-lg shadow-primary/20">
+                            +$842k Saved
+                        </div>
+</div>
+</div>
+</section>
+<!-- Top Dupes List -->
+<section class="mb-8">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Top Dupes Selected</h3>
+<div class="flex flex-col gap-3">
+<!-- Dupe 1 -->
+<div class="flex items-center gap-4 rounded-xl bg-surface-dark/50 p-3 border border-white/5">
+<div class="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-white/5">
+<img alt="Red Sneaker" class="h-full w-full object-cover grayscale opacity-80" data-alt="Close up of a red designer sneaker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXGVDOzJ5P-oB4CPkIGlqgGdeDG6bFV4h3qwtZeWhd9BNLJWW2TqolB1zMTi4xhcjTD3ujPRtqBMUzc7ppYkvkBi4BMo_BUVzFB7kjRzHDuZtR5ac8YP6UWsbvH7FrI8SVkiHx6Y5h6tldvjnC2gQ1jPBqDLXb6JmLX5avIrM8g9dV6CMLc5gTDU3Q_82Th03vkvWuy3q5EUhi1pl43ztelA2rqOLc5KlYyxjpYjLtwf03TtfcKyJJ2TUbvO031bhnxdaAXXF3eE4"/>
+</div>
+<div class="flex flex-1 flex-col">
+<h4 class="text-sm font-bold">Cloud Runners</h4>
+<p class="text-[10px] text-slate-500">Dupe for Luxury Walkers</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-primary">Saved $120k</p>
+<p class="text-[10px] text-slate-500">4.2k picks</p>
+</div>
+</div>
+<!-- Dupe 2 -->
+<div class="flex items-center gap-4 rounded-xl bg-surface-dark/50 p-3 border border-white/5">
+<div class="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-white/5">
+<img alt="Smart Watch" class="h-full w-full object-cover grayscale opacity-80" data-alt="Generic smart watch with black band" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEgM0z7w2xq4Ls0VTeNP7EHU_O8sKEAfWW37L7noVnDH9bHz7EcORlExSM3oK6aKySUhm67KBYmn6rs99FFuTmyH00iv-Sa8WwQ7JVbSv-P2aNHU3A5l0DhltnpNhG963t1Oq7GnmIHKVWdbhwvl43-Tt_PiwxUsPlCYRpsfIBuH0IsEW0DDHU9Kr9rqi8m6Kb56r2uoX1AW4qnPlQPBtg7zjlFtw4n0aZccaekXZXnLNta35sP9kevI4TjRC_kVHg48AkVwL44U4"/>
+</div>
+<div class="flex flex-1 flex-col">
+<h4 class="text-sm font-bold">TimeKeeper v2</h4>
+<p class="text-[10px] text-slate-500">Dupe for Pear Watch Ultra</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-primary">Saved $340k</p>
+<p class="text-[10px] text-slate-500">1.8k picks</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Sidebar / Tab Bar for iOS (Mobile Context) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 flex h-20 items-center justify-around bg-surface-dark/90 px-6 pb-4 backdrop-blur-xl border-t border-white/5">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl">grid_view</span>
+<span class="text-[10px] font-bold">Dash</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-2xl">inventory_2</span>
+<span class="text-[10px] font-bold">Stock</span>
+</button>
+<button class="relative -top-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-xl shadow-primary/30 border-4 border-background-dark">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-2xl">shopping_cart</span>
+<span class="text-[10px] font-bold">Orders</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-2xl">monitoring</span>
+<span class="text-[10px] font-bold">Insights</span>
+</button>
+</nav>
+<!-- Sidebar Overlay (Initially Hidden/Interactive logic simulation) -->
+<div class="pointer-events-none absolute inset-0 z-50 overflow-hidden opacity-0 transition-opacity">
+<div class="absolute left-0 top-0 h-full w-3/4 max-w-xs bg-surface-dark p-6 shadow-2xl">
+<div class="mb-10 flex items-center gap-3">
+<span class="material-symbols-outlined text-3xl text-primary">shopping_bag</span>
+<span class="text-xl font-bold italic tracking-tighter">SHOPAHOLICS</span>
+</div>
+<ul class="flex flex-col gap-2">
+<li class="flex items-center gap-4 rounded-xl bg-primary/10 p-3 text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-bold">Overview</span>
+</li>
+<li class="flex items-center gap-4 p-3 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">package_2</span>
+<span class="font-bold">Products</span>
+</li>
+<li class="flex items-center gap-4 p-3 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-bold">Orders</span>
+</li>
+<li class="flex items-center gap-4 p-3 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">category</span>
+<span class="font-bold">Categories</span>
+</li>
+<li class="flex items-center gap-4 p-3 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-bold">Analytics</span>
+</li>
+<li class="mt-8 flex items-center gap-4 p-3 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-bold">Settings</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body></html>

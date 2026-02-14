@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mate's Price Drop Alert - Shopaholics Inc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a855f7",
+                        "card-bg": "#2a2a2a",
+                        "background-dark": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-400;
+            }
+            .btn-gradient {
+                @apply bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 transition-all duration-300 shadow-lg shadow-purple-500/20;
+            }
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-slate-100 min-h-screen flex justify-center items-center p-4">
+<div class="relative flex h-[844px] w-full max-w-[390px] flex-col bg-black overflow-hidden border border-white/10 shadow-2xl rounded-[3rem]">
+<div class="h-12 w-full flex items-center justify-between px-8">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5">
+<span class="material-symbols-outlined text-sm">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-sm">wifi</span>
+<span class="material-symbols-outlined text-sm">battery_full</span>
+</div>
+</div>
+<main class="flex-1 flex flex-col items-center justify-center px-6">
+<div class="w-full bg-card-bg/80 backdrop-blur-xl border border-white/5 rounded-2xl p-4 mb-8 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-700">
+<div class="flex items-center gap-2 mb-3">
+<div class="size-6 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-white">smart_toy</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Shopaholics Mate • Just Now</span>
+</div>
+<h1 class="text-2xl font-extrabold tracking-tight text-gradient mb-2">
+                    Good News for your Poor Wallet!
+                </h1>
+<p class="text-sm text-slate-300 leading-relaxed italic">
+                    "That Cloud Lamp you were eyeing just dropped from $89.99 to $59.99. It’s still a glorified lightbulb, but at least it’s a cheaper one now."
+                </p>
+</div>
+<div class="w-full relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 rounded-2xl"></div>
+<div class="bg-card-bg rounded-2xl overflow-hidden border border-white/10 aspect-square flex items-center justify-center relative">
+<img alt="Cloud Lamp" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrwRDalw4wpJ7qFq8n2n4DZUovP7ZxeFkFN-Qy8gP8LY5WVvnVPjbQdHS-bSMlFFedOetwJB2XAhg1h6kFkoXwqQZGCaGDmZUvVSWr_cPg4YPjHK82f9uYLU2lfYVd0QPlajJ8jNDdcDhReXAsJUdeRZ-Pexe_pRqsKwFKD3khZ7Iwj5lOqe8MFRwJ46J8OnxWsT0Igg0H4HLn6gO6xyoSAAHnhK39VJAslEJrXGZOaggGqotWle1dBYvSdCpTYfCnjel0gF2OpXY"/>
+<div class="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+<span class="text-xs font-bold text-cyan-400">-33% OFF</span>
+</div>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+<div class="bg-primary px-6 py-2 rounded-full shadow-xl flex items-baseline gap-2 border border-white/20">
+<span class="text-xs line-through text-white/50">$89.99</span>
+<span class="text-xl font-black text-white">$59.99</span>
+</div>
+</div>
+</div>
+<div class="mt-12 w-full space-y-3">
+<button class="w-full btn-gradient py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Snag the Deal
+                </button>
+<button class="w-full bg-white/5 hover:bg-white/10 py-4 rounded-xl text-slate-400 font-medium text-sm transition-colors active:scale-95">
+                    Nah, still too much
+                </button>
+</div>
+</main>
+<footer class="h-8 flex justify-center items-end pb-2">
+<div class="w-32 h-1 bg-white/20 rounded-full"></div>
+</footer>
+<div class="absolute -top-20 -right-20 size-64 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="absolute -bottom-20 -left-20 size-64 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+</div>
+
+</body></html>
