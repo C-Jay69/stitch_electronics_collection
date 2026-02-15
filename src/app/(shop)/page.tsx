@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Monitor, Shirt, Home as HomeIcon, Sparkles } from "lucide-react";
+import { Monitor, Shirt, Home as HomeIcon, Sparkles, ShoppingBag } from "lucide-react";
 import prisma from "@/lib/prisma";
 
 export default async function Home() {

@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Shopping that doesn't suck.",
 };
 
+import { Providers } from "./providers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +24,9 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} font-sans antialiased bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen`}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

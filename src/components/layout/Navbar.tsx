@@ -1,12 +1,19 @@
-"use client";
-
-import Link from "next/link";
-import Image from "next/image";
-import { ShoppingBag, ShoppingCart, Menu, User } from "lucide-react";
-import { useStore } from "@/store";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export const Navbar = () => {
-    const cartCount = useStore((state) => state.cart.length);
+    const { data: session } = useSession();
+    const { cart, initCart } = useStore();
+
+    // Sync cart on login
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    import { useEffect } from "react";
+    useEffect(() => {
+        if (session?.user) {
+            initCart();
+        }
+    }, [session]);
+
+    const cartCount = cart.length;
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-slate-200 dark:border-white/10">
@@ -19,10 +26,6 @@ export const Navbar = () => {
                             alt="Shopaholics Inc Logo"
                             fill
                             className="object-contain"
-                            onError={(e) => {
-                                // Hide image on error (optional implementation detail, for now just basic render)
-                                // In a real app we'd toggle state to show icon instead
-                            }}
                         />
                     </div>
                     <span className="font-display font-bold text-xl tracking-tight hidden sm:block">
@@ -34,21 +37,43 @@ export const Navbar = () => {
                     <Link href="/shop" className="text-sm font-medium text-slate-500 hover:text-white transition-colors hidden md:block">
                         Shop
                     </Link>
-                    <Link href="/about" className="text-sm font-medium text-slate-500 hover:text-white transition-colors hidden md:block">
-                        Our "Mission"
-                    </Link>
+                    {session?.user && (
+                        <Link href="/admin" className="text-sm font-medium text-slate-500 hover:text-white transition-colors hidden md:block">
+                            Admin
+                        </Link>
+                    )}
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <Link href="/cart" className="relative p-2 hover:bg-white/5 rounded-full transition-colors">
+                    {session ? (
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                                    {session.user?.name?.[0] || "U"}
+                                </div>
+                                <button
+                                    onClick={() => signOut()}
+                                    className="text-xs font-bold text-red-400 hover:text-red-300"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <button
+                            onClick={() => signIn()}
+                            className="text-sm font-bold text-primary hover:text-white transition-colors"
+                        >
+                            Sign In
+                        </button>
+                    )}
+
+                    <Link href="/cart" className="relative p-2 hover:bg-whitte/5 rounded-full transition-colors">
                         <ShoppingCart className="w-6 h-6" />
                         {cartCount > 0 && (
                             <span className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full animate-bounce"></span>
                         )}
                     </Link>
-                    <button className="p-2 hover:bg-white/5 rounded-full transition-colors">
-                        <Menu className="w-6 h-6" />
-                    </button>
                 </div>
             </div>
         </nav>
