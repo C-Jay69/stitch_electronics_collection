@@ -1,15 +1,7 @@
+import { Product as PrismaProduct } from "@prisma/client";
 
-// This file will hold the types for our project
-export type Product = {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    image: string;
-    category: string;
-    isDupe?: boolean; // If true, this is a cheaper alternative
-    originalPrice?: number; // If it's a dupe, show what it's a dupe of
-};
+// Re-export Prisma Product as our main Product type
+export type Product = PrismaProduct;
 
 export type CartItem = Product & {
     quantity: number;
