@@ -28,13 +28,31 @@ export async function GET(req: Request) {
     // Current active cart (PENDING order)
     const cart = user.orders[0];
 
+    // Calculate current splurge (Total of COMPLETED orders this month)
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    
+    const monthlySplurge = await prisma.order.aggregate({
+        _sum: { total: true },
+        where: {
+            userId: user.id,
+            status: 'COMPLETED',
+            createdAt: { gte: startOfMonth }
+        }
+    });
+
     return NextResponse.json({
         cartId: cart?.id,
         items: cart?.items.map(item => ({
             ...item.product,
             quantity: item.quantity,
             cartItemId: item.id
-        })) || []
+        })) || [],
+        settings: {
+            sarcasmLevel: user.sarcasmLevel === 100 ? 'nuclear' : user.sarcasmLevel > 75 ? 'high' : 'medium',
+            monthlyLimit: user.splurgeLimit || 500,
+            currentSplurge: monthlySplurge._sum.total || 0
+        }
     });
 }
 
