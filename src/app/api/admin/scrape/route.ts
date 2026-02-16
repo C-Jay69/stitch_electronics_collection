@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+// Import standard puppeteer for local dev
 import puppeteer from "puppeteer";
+// Import core and chromium for production (verified availability)
+import chromium from "@sparticuz/chromium";
+import puppeteerCore from "puppeteer-core";
 
 export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
 
-    // Basic auth check (in real app, check for admin role)
+    // Basic auth check
     if (!session?.user?.email) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -18,14 +22,27 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "URL is required" }, { status: 400 });
         }
 
-        const browser = await puppeteer.launch({
-            headless: true, // "new" is deprecated, true is the new default or use "new" if older version
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-        });
+        let browser;
+
+        if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+            // Production: Use puppeteer-core + @sparticuz/chromium
+            browser = await puppeteerCore.launch({
+                args: chromium.args,
+                defaultViewport: chromium.defaultViewport,
+                executablePath: await chromium.executablePath(),
+                headless: Number(chromium.headless) === 1 ? true : false,
+            });
+        } else {
+            // Local: Use full puppeteer
+            browser = await puppeteer.launch({
+                headless: true,
+                args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+        }
 
         const page = await browser.newPage();
 
-        // Set user agent to avoid being blocked immediately
+        // Set user agent
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
@@ -34,13 +51,9 @@ export async function POST(req: Request) {
         const data = await page.evaluate(() => {
             const title = document.querySelector('h1')?.innerText || document.title;
 
-            // Try to find price
-            // simple regex to find currency symbol followed by numbers
             const priceRegex = /[$€£¥]\s*\d+([.,]\d{2})?/;
             const prices: number[] = [];
 
-            // Scan all text nodes or elements
-            // This is very naive. In a real scraper, we'd use specific selectors per site.
             document.querySelectorAll('*').forEach(el => {
                 if (el.children.length === 0 && el.textContent) {
                     const match = el.textContent.match(priceRegex);
@@ -53,12 +66,8 @@ export async function POST(req: Request) {
                 }
             });
 
-            // Guessing the price is usually the largest font size or first one found?
-            // Let's Just take the first one that looks "reasonable" or the max one?
-            // Actually, usually the main price is prominent.
             const price = prices.length > 0 ? prices[0] : 0;
 
-            // Image: find the largest image
             let maxArea = 0;
             let mainImage = "";
             document.querySelectorAll('img').forEach(img => {
