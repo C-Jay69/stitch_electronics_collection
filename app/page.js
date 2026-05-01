@@ -1428,6 +1428,182 @@ function Dashboard({ go }) {
 }
 
 // =================================================================
+// FLOATING PAWCOACH WIDGET
+// =================================================================
+function FloatingPawCoach() {
+  const { user } = useAuth()
+  const [open, setOpen] = useState(false)
+  const [dogs, setDogs] = useState([])
+  const [activeDogId, setActiveDogId] = useState(null)
+  const [messages, setMessages] = useState([])
+  const [input, setInput] = useState('')
+  const [busy, setBusy] = useState(false)
+  const scrollRef = useRef(null)
+
+  useEffect(() => {
+    if (open && user && dogs.length === 0) {
+      api('/dogs').then(d => {
+        setDogs(d)
+        if (d.length && !activeDogId) setActiveDogId(d[0].id)
+      }).catch(()=>{})
+    }
+  }, [open, user])
+
+  const sessionId = useMemo(() => {
+    if (!activeDogId || typeof window === 'undefined') return null
+    const k = `pp-session-${activeDogId}`
+    let s = localStorage.getItem(k)
+    if (!s) { s = `${activeDogId}-${Date.now()}`; localStorage.setItem(k, s) }
+    return s
+  }, [activeDogId])
+
+  useEffect(() => {
+    if (sessionId) api(`/chat/${sessionId}`).then(setMessages).catch(()=>{})
+  }, [sessionId])
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 999999, behavior: 'smooth' })
+  }, [messages, busy, open])
+
+  const activeDog = dogs.find(d => d.id === activeDogId)
+
+  const send = async () => {
+    if (!input.trim() || !activeDogId || busy) return
+    const text = input.trim(); setInput('')
+    setMessages(m => [...m, { id:'temp-'+Date.now(), role:'user', content:text, createdAt:new Date() }])
+    setBusy(true)
+    try {
+      const res = await api('/chat', { method:'POST', body: JSON.stringify({ dogId: activeDogId, sessionId, message: text }) })
+      setMessages(m => [...m, res.message])
+    } catch (e) {
+      toast.error(e.message)
+    } finally { setBusy(false) }
+  }
+
+  if (!user) return null
+
+  return (
+    <>
+      {/* Floating button */}
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          className="fixed bottom-6 right-6 z-50 group"
+          aria-label="Open PawCoach"
+        >
+          <div className="absolute inset-0 rounded-full bg-primary/40 animate-ping opacity-50" />
+          <div className="relative h-14 w-14 rounded-full bg-gradient-to-br from-primary to-amber-500 shadow-2xl shadow-primary/50 grid place-items-center text-primary-foreground hover:scale-110 transition-transform">
+            <PawPrint className="h-6 w-6 wag" />
+          </div>
+          <div className="absolute -top-2 -right-1 h-5 w-5 rounded-full bg-emerald-500 border-2 border-card grid place-items-center">
+            <Sparkles className="h-2.5 w-2.5 text-white" />
+          </div>
+          <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-card border rounded-full shadow-lg px-3 py-1.5 text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            Ask PawCoach 🐾
+          </div>
+        </button>
+      )}
+
+      {/* Chat panel */}
+      {open && (
+        <div className="fixed bottom-6 right-6 z-50 w-[calc(100vw-3rem)] sm:w-[400px] h-[calc(100vh-7rem)] sm:h-[600px] rounded-2xl shadow-2xl border-2 border-primary/20 bg-card flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
+          {/* Header */}
+          <div className="bg-gradient-to-br from-primary to-amber-500 text-primary-foreground p-4 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="h-9 w-9 rounded-full bg-white/20 backdrop-blur grid place-items-center shrink-0">
+                <PawPrint className="h-5 w-5"/>
+              </div>
+              <div className="min-w-0">
+                <div className="font-display font-bold leading-tight">PawCoach</div>
+                <div className="text-xs opacity-90 truncate">
+                  {activeDog ? `Coaching ${activeDog.name}` : 'Pick a dog to start'}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              {dogs.length > 1 && (
+                <Select value={activeDogId || ''} onValueChange={(v)=>{setActiveDogId(v); setMessages([])}}>
+                  <SelectTrigger className="h-8 w-[110px] bg-white/20 border-white/30 text-primary-foreground text-xs">
+                    <SelectValue placeholder="Dog"/>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {dogs.map(d => <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              )}
+              <button onClick={()=>setOpen(false)} className="h-8 w-8 rounded-full hover:bg-white/20 grid place-items-center transition-colors" aria-label="Close">
+                <X className="h-4 w-4"/>
+              </button>
+            </div>
+          </div>
+
+          {/* Messages */}
+          <ScrollArea className="flex-1 bg-gradient-to-b from-amber-50/40 to-card" ref={scrollRef}>
+            <div className="p-3 space-y-3">
+              {!activeDog && (
+                <div className="text-center text-sm text-muted-foreground py-10">
+                  <DogIcon className="h-10 w-10 mx-auto mb-2 opacity-40"/>
+                  Add a dog from the dashboard to start chatting.
+                </div>
+              )}
+              {activeDog && messages.length === 0 && (
+                <div className="text-center text-xs text-muted-foreground py-6">
+                  <PawPrint className="h-8 w-8 mx-auto mb-2 text-primary/50"/>
+                  <div className="font-display text-base text-foreground mb-1">Hi! I'm PawCoach 🐾</div>
+                  <div className="mb-3">Ask anything about {activeDog.name} — training, food, behavior.</div>
+                  <div className="grid gap-1.5">
+                    {[
+                      `Quick 5-min training game?`,
+                      `${activeDog.name} won't sit outside — alternatives?`,
+                      `Make today's meal lighter`,
+                    ].map((s,i)=>(
+                      <button key={i} onClick={()=>setInput(s)} className="text-left text-xs rounded-lg border bg-card hover:bg-accent p-2.5 transition-colors">
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {messages.map(m => (
+                <div key={m.id} className={`flex gap-2 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  {m.role !== 'user' && <div className="h-7 w-7 rounded-full bg-primary/15 text-primary grid place-items-center shrink-0"><PawPrint className="h-3.5 w-3.5"/></div>}
+                  <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm whitespace-pre-wrap leading-relaxed ${m.role === 'user' ? 'bg-primary text-primary-foreground rounded-br-md' : 'bg-card border rounded-bl-md'}`}>
+                    {m.content}
+                  </div>
+                </div>
+              ))}
+              {busy && (
+                <div className="flex gap-2 justify-start">
+                  <div className="h-7 w-7 rounded-full bg-primary/15 text-primary grid place-items-center"><PawPrint className="h-3.5 w-3.5 wag"/></div>
+                  <div className="bg-card border rounded-2xl rounded-bl-md px-3 py-2 text-sm flex items-center gap-2">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin"/> Thinking...
+                  </div>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+
+          {/* Input */}
+          <div className="border-t bg-card p-2.5 flex gap-2">
+            <Input
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && send()}
+              placeholder={activeDog ? `Ask about ${activeDog.name}...` : 'Pick a dog first'}
+              disabled={busy || !activeDog}
+              className="text-sm h-9"
+            />
+            <Button onClick={send} disabled={busy || !input.trim() || !activeDog} size="icon" className="rounded-full h-9 w-9 shrink-0">
+              <Send className="h-4 w-4"/>
+            </Button>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
+// =================================================================
 // APP SHELL
 // =================================================================
 function AppInner() {
@@ -1450,23 +1626,33 @@ function AppInner() {
   useEffect(() => { api('/seed', { method:'POST' }).catch(()=>{}) }, [])
 
   const go = (v) => {
-    if (v === 'dashboard' && !user) return setView('login')
     if (v === 'admin' && user?.role !== 'admin') return setView('home')
     setView(v)
   }
 
   if (loading) return <div className="min-h-screen grid place-items-center"><Loader2 className="h-8 w-8 animate-spin text-primary"/></div>
 
-  if (view === 'home') return <Landing go={go}/>
-  if (view === 'login') return <AuthCard go={go} mode="login"/>
-  if (view === 'register') return <AuthCard go={go} mode="register"/>
-  if (view === 'change-password') return <ChangePasswordPage go={go}/>
-  if (view === 'pricing') return <PricingPage go={go}/>
-  if (view === 'account') return user ? <AccountPage go={go}/> : <AuthCard go={go} mode="login"/>
-  if (view === 'admin') return <AdminPage go={go}/>
-  if (view === 'payment-return') return <PaymentReturnHandler go={go}/>
-  if (view === 'dashboard') return user ? <Dashboard go={go}/> : <AuthCard go={go} mode="login"/>
-  return <Landing go={go}/>
+  let content
+  if (view === 'home') content = <Landing go={go}/>
+  else if (view === 'login') content = <AuthCard go={go} mode="login"/>
+  else if (view === 'register') content = <AuthCard go={go} mode="register"/>
+  else if (view === 'change-password') content = <ChangePasswordPage go={go}/>
+  else if (view === 'pricing') content = <PricingPage go={go}/>
+  else if (view === 'account') content = user ? <AccountPage go={go}/> : <AuthCard go={go} mode="login"/>
+  else if (view === 'admin') content = <AdminPage go={go}/>
+  else if (view === 'payment-return') content = <PaymentReturnHandler go={go}/>
+  else if (view === 'dashboard') content = user ? <Dashboard go={go}/> : <AuthCard go={go} mode="login"/>
+  else content = <Landing go={go}/>
+
+  const hideFloatingViews = ['home','login','register','change-password','payment-return']
+  const showFloating = user && !hideFloatingViews.includes(view)
+
+  return (
+    <>
+      {content}
+      {showFloating && <FloatingPawCoach/>}
+    </>
+  )
 }
 
 function App() {
