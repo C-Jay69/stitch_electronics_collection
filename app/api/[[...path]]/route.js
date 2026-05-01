@@ -7,6 +7,8 @@ import {
   hashPassword, verifyPassword, signToken, getUserFromRequest, userTier,
   checkPlanLimit, checkChatLimit
 } from '@/lib/auth'
+import stripe, { PRICE_IDS, ensureCustomer, applySubscriptionToUser, clearSubscription, priceToPlanKey } from '@/lib/stripe'
+import { putObject, getObject, buildUploadPath, ALLOWED_IMAGE_MIMES, MIME_EXT } from '@/lib/storage'
 
 // MongoDB
 let client
@@ -485,28 +487,34 @@ Allergies: ${allergies}. Behavior issues: ${issues}. Goals: ${goals}.\n`
       return handleCORS(NextResponse.json(entries.map(({ _id, ...r }) => r)))
     }
 
-    // --- payments ---
+    // --- payments (real recurring Stripe subscriptions) ---
     if (route === '/payments/checkout' && method === 'POST') {
       const u = await requireUser(request, db)
       const body = await request.json()
       const planKey = body.plan
-      if (!PLANS[planKey]) return handleCORS(NextResponse.json({ error: 'Invalid plan' }, { status: 400 }))
-      const plan = PLANS[planKey]
+      if (!['monthly','yearly'].includes(planKey)) return handleCORS(NextResponse.json({ error: 'Invalid plan' }, { status: 400 }))
+      const priceId = PRICE_IDS[planKey]
+      if (!priceId) return handleCORS(NextResponse.json({ error: 'Price not configured' }, { status: 500 }))
       const origin = body.originUrl || `https://${request.headers.get('host')}`
-      const success_url = `${origin}/?payment=success&session_id={CHECKOUT_SESSION_ID}`
-      const cancel_url = `${origin}/?payment=cancel`
-      const meta = { user_id: u.id, plan: planKey, source: 'web' }
-      const session = await callStripe({
-        action: 'create_session', host_url: origin,
-        amount: plan.amount, currency: plan.currency,
-        success_url, cancel_url, metadata: meta,
+      const customerId = await ensureCustomer(db, u)
+      const session = await stripe.checkout.sessions.create({
+        mode: 'subscription',
+        customer: customerId,
+        line_items: [{ price: priceId, quantity: 1 }],
+        success_url: `${origin}/?payment=success&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/?payment=cancel`,
+        metadata: { user_id: u.id, plan: planKey },
+        client_reference_id: u.id,
+        allow_promotion_codes: true,
+        subscription_data: { metadata: { user_id: u.id, plan: planKey } },
       })
       await db.collection('payment_transactions').insertOne({
-        id: uuidv4(), userId: u.id, sessionId: session.session_id, plan: planKey,
-        amount: plan.amount, currency: plan.currency, status: 'initiated',
-        paymentStatus: 'pending', metadata: meta, createdAt: new Date(),
+        id: uuidv4(), userId: u.id, sessionId: session.id, plan: planKey,
+        priceId, amount: planKey === 'monthly' ? 12.99 : 109.00, currency: 'usd',
+        status: session.status || 'open', paymentStatus: 'pending',
+        metadata: session.metadata, createdAt: new Date(),
       })
-      return handleCORS(NextResponse.json({ url: session.url, sessionId: session.session_id }))
+      return handleCORS(NextResponse.json({ url: session.url, sessionId: session.id }))
     }
     if (route.startsWith('/payments/status/') && method === 'GET') {
       const u = await requireUser(request, db)
@@ -514,32 +522,34 @@ Allergies: ${allergies}. Behavior issues: ${issues}. Goals: ${goals}.\n`
       const txn = await db.collection('payment_transactions').findOne({ sessionId: sid })
       if (!txn) return handleCORS(NextResponse.json({ error: 'not found' }, { status: 404 }))
       if (txn.userId !== u.id && u.role !== 'admin') return handleCORS(NextResponse.json({ error: 'forbidden' }, { status: 403 }))
-      // Idempotent: if already paid, return cached
-      if (txn.paymentStatus === 'paid') {
-        return handleCORS(NextResponse.json({ status: txn.status, payment_status: txn.paymentStatus, amount: txn.amount, currency: txn.currency, plan: txn.plan }))
-      }
       try {
-        const stripe = await callStripe({ action: 'get_status', host_url: `https://${request.headers.get('host')}`, session_id: sid })
-        // Update transaction
-        await db.collection('payment_transactions').updateOne({ sessionId: sid }, { $set: { status: stripe.status, paymentStatus: stripe.payment_status, updatedAt: new Date() } })
-        // If paid and not yet processed, grant subscription (idempotent guard via processedAt)
-        if (stripe.payment_status === 'paid' && !txn.processedAt) {
-          const planKey = txn.plan
-          const cfg = PLANS[planKey]
-          const now = new Date()
-          const current = u.subscription || {}
-          const baseDate = (current.tier === 'premium' && current.expiresAt && new Date(current.expiresAt) > now) ? new Date(current.expiresAt) : now
-          const expiresAt = new Date(baseDate.getTime() + cfg.durationDays * 24*60*60*1000)
-          await db.collection('users').updateOne({ id: u.id }, {
-            $set: { subscription: { tier: 'premium', plan: planKey, expiresAt, autoRenew: true, lastPaymentSessionId: sid } }
-          })
-          await db.collection('payment_transactions').updateOne({ sessionId: sid }, { $set: { processedAt: new Date() } })
+        const session = await stripe.checkout.sessions.retrieve(sid, { expand: ['subscription'] })
+        await db.collection('payment_transactions').updateOne({ sessionId: sid }, {
+          $set: { status: session.status, paymentStatus: session.payment_status, updatedAt: new Date() }
+        })
+        if (session.subscription && typeof session.subscription === 'object') {
+          await applySubscriptionToUser(db, u.id, session.subscription)
+        } else if (session.subscription) {
+          const sub = await stripe.subscriptions.retrieve(session.subscription)
+          await applySubscriptionToUser(db, u.id, sub)
         }
-        return handleCORS(NextResponse.json({ status: stripe.status, payment_status: stripe.payment_status, amount: stripe.amount_total, currency: stripe.currency, plan: txn.plan }))
-      } catch (stripeErr) {
-        // Stripe test sessions may not be immediately retrievable; return cached transaction data
-        return handleCORS(NextResponse.json({ status: txn.status, payment_status: txn.paymentStatus, amount: txn.amount, currency: txn.currency, plan: txn.plan, note: 'Stripe session not yet available' }))
+        return handleCORS(NextResponse.json({
+          status: session.status, payment_status: session.payment_status,
+          amount: (session.amount_total || 0) / 100, currency: session.currency || txn.currency, plan: txn.plan,
+        }))
+      } catch (e) {
+        return handleCORS(NextResponse.json({ status: txn.status, payment_status: txn.paymentStatus, amount: txn.amount, currency: txn.currency, plan: txn.plan, note: e.message }))
       }
+    }
+    if (route === '/payments/portal' && method === 'POST') {
+      const u = await requireUser(request, db)
+      const body = await request.json().catch(()=>({}))
+      const customerId = await ensureCustomer(db, u)
+      const origin = body.originUrl || `https://${request.headers.get('host')}`
+      const portal = await stripe.billingPortal.sessions.create({
+        customer: customerId, return_url: `${origin}/?view=account`,
+      })
+      return handleCORS(NextResponse.json({ url: portal.url }))
     }
     if (route === '/payments/history' && method === 'GET') {
       const u = await requireUser(request, db)
@@ -548,35 +558,133 @@ Allergies: ${allergies}. Behavior issues: ${issues}. Goals: ${goals}.\n`
     }
     if (route === '/payments/cancel' && method === 'POST') {
       const u = await requireUser(request, db)
-      await db.collection('users').updateOne({ id: u.id }, { $set: { 'subscription.autoRenew': false } })
+      const subId = u.subscription?.stripeSubscriptionId
+      if (subId) {
+        try {
+          const sub = await stripe.subscriptions.update(subId, { cancel_at_period_end: true })
+          await applySubscriptionToUser(db, u.id, sub)
+        } catch (e) { /* sub already canceled */ }
+      } else {
+        await db.collection('users').updateOne({ id: u.id }, { $set: { 'subscription.cancelAtPeriodEnd': true, 'subscription.autoRenew': false } })
+      }
       return handleCORS(NextResponse.json({ ok: true }))
     }
     if (route === '/webhook/stripe' && method === 'POST') {
       const sig = request.headers.get('stripe-signature') || ''
-      const body = await request.arrayBuffer()
-      const b64 = Buffer.from(body).toString('base64')
+      const rawBody = await request.text()
+      let event
       try {
-        const wh = await callStripe({ action: 'handle_webhook', host_url: `https://${request.headers.get('host')}`, body_b64: b64, signature: sig })
-        if (wh.session_id && wh.payment_status === 'paid') {
-          const txn = await db.collection('payment_transactions').findOne({ sessionId: wh.session_id })
-          if (txn && !txn.processedAt) {
-            const cfg = PLANS[txn.plan]
-            const user = await db.collection('users').findOne({ id: txn.userId })
-            const now = new Date()
-            const current = user?.subscription || {}
-            const baseDate = (current.tier === 'premium' && current.expiresAt && new Date(current.expiresAt) > now) ? new Date(current.expiresAt) : now
-            const expiresAt = new Date(baseDate.getTime() + cfg.durationDays * 24*60*60*1000)
-            await db.collection('users').updateOne({ id: txn.userId }, {
-              $set: { subscription: { tier: 'premium', plan: txn.plan, expiresAt, autoRenew: true, lastPaymentSessionId: wh.session_id } }
+        event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET)
+      } catch (e) {
+        console.error('webhook sig fail', e.message)
+        return handleCORS(NextResponse.json({ error: `Webhook signature: ${e.message}` }, { status: 400 }))
+      }
+      try {
+        const obj = event.data.object
+        switch (event.type) {
+          case 'checkout.session.completed': {
+            const userId = obj.metadata?.user_id || obj.client_reference_id
+            if (userId && obj.subscription) {
+              const sub = await stripe.subscriptions.retrieve(obj.subscription)
+              await applySubscriptionToUser(db, userId, sub)
+            }
+            await db.collection('payment_transactions').updateOne({ sessionId: obj.id }, {
+              $set: { status: obj.status, paymentStatus: obj.payment_status, processedAt: new Date(), updatedAt: new Date() }
             })
-            await db.collection('payment_transactions').updateOne({ sessionId: wh.session_id }, { $set: { paymentStatus: 'paid', status: 'complete', processedAt: new Date(), updatedAt: new Date() } })
+            break
+          }
+          case 'customer.subscription.created':
+          case 'customer.subscription.updated': {
+            const userId = obj.metadata?.user_id
+            const target = userId ? { id: userId } : await db.collection('users').findOne({ stripeCustomerId: obj.customer })
+            if (target) await applySubscriptionToUser(db, target.id, obj)
+            break
+          }
+          case 'customer.subscription.deleted': {
+            const userId = obj.metadata?.user_id
+            const target = userId ? { id: userId } : await db.collection('users').findOne({ stripeCustomerId: obj.customer })
+            if (target) await clearSubscription(db, target.id)
+            break
+          }
+          case 'invoice.paid': {
+            if (obj.subscription) {
+              const sub = await stripe.subscriptions.retrieve(obj.subscription)
+              const userId = sub.metadata?.user_id
+              const target = userId ? { id: userId } : await db.collection('users').findOne({ stripeCustomerId: obj.customer })
+              if (target) await applySubscriptionToUser(db, target.id, sub)
+            }
+            break
           }
         }
-        return handleCORS(NextResponse.json({ ok: true }))
+        return handleCORS(NextResponse.json({ received: true, type: event.type }))
       } catch (e) {
-        console.error('webhook err', e)
-        return handleCORS(NextResponse.json({ ok: false, error: e.message }, { status: 400 }))
+        console.error('webhook proc fail', e)
+        return handleCORS(NextResponse.json({ error: e.message }, { status: 500 }))
       }
+    }
+
+    // --- file uploads (Emergent Object Storage) ---
+    if (route === '/upload' && method === 'POST') {
+      const u = await requireUser(request, db)
+      const form = await request.formData()
+      const file = form.get('file')
+      if (!file || typeof file === 'string') return handleCORS(NextResponse.json({ error: 'file required' }, { status: 400 }))
+      const contentType = file.type || 'application/octet-stream'
+      if (!ALLOWED_IMAGE_MIMES.has(contentType)) return handleCORS(NextResponse.json({ error: 'Only JPG/PNG/WEBP/GIF allowed' }, { status: 400 }))
+      const buffer = Buffer.from(await file.arrayBuffer())
+      if (buffer.length > 5 * 1024 * 1024) return handleCORS(NextResponse.json({ error: 'Max 5MB' }, { status: 400 }))
+      const ext = MIME_EXT[contentType] || 'bin'
+      const storagePath = buildUploadPath(u.id, ext)
+      const result = await putObject(storagePath, buffer, contentType)
+      const fileDoc = {
+        id: uuidv4(), ownerId: u.id, storagePath: result.path || storagePath,
+        originalFilename: file.name || 'photo', contentType, size: result.size || buffer.length,
+        purpose: form.get('purpose') || 'general', dogId: form.get('dogId') || null,
+        isDeleted: false, createdAt: new Date(),
+      }
+      await db.collection('files').insertOne(fileDoc)
+      // If this is a dog avatar, attach it to the dog
+      if (fileDoc.purpose === 'dog-avatar' && fileDoc.dogId) {
+        // Update dog's photoFileId - allow for demo dogs (isDemo: true) or owned dogs
+        await db.collection('dogs').updateOne(
+          { id: fileDoc.dogId, $or: [{ ownerId: u.id }, { isDemo: true }] },
+          { $set: { photoFileId: fileDoc.id } }
+        )
+      }
+      const { _id, ...rest } = fileDoc
+      return handleCORS(NextResponse.json(rest))
+    }
+    if (route.startsWith('/files/') && pathSeg[2] === 'download' && method === 'GET') {
+      const u = await getUserFromRequest(request, db)
+      const id = pathSeg[1]
+      const fileDoc = await db.collection('files').findOne({ id, isDeleted: false })
+      if (!fileDoc) return handleCORS(NextResponse.json({ error: 'not found' }, { status: 404 }))
+      if (!fileDoc.public && (!u || (fileDoc.ownerId !== u.id && u.role !== 'admin'))) {
+        return handleCORS(NextResponse.json({ error: 'forbidden' }, { status: 403 }))
+      }
+      const obj = await getObject(fileDoc.storagePath)
+      return new NextResponse(obj.buffer, {
+        status: 200,
+        headers: { 'Content-Type': fileDoc.contentType || obj.contentType, 'Cache-Control': 'private, max-age=3600' },
+      })
+    }
+    if (route.startsWith('/files/') && method === 'DELETE') {
+      const u = await requireUser(request, db)
+      const id = pathSeg[1]
+      const fileDoc = await db.collection('files').findOne({ id })
+      if (!fileDoc) return handleCORS(NextResponse.json({ error: 'not found' }, { status: 404 }))
+      if (fileDoc.ownerId !== u.id && u.role !== 'admin') return handleCORS(NextResponse.json({ error: 'forbidden' }, { status: 403 }))
+      await db.collection('files').updateOne({ id }, { $set: { isDeleted: true, deletedAt: new Date() } })
+      return handleCORS(NextResponse.json({ ok: true }))
+    }
+    if (route === '/files' && method === 'GET') {
+      const u = await requireUser(request, db)
+      const url = new URL(request.url)
+      const dogId = url.searchParams.get('dogId')
+      const q = { ownerId: u.id, isDeleted: false }
+      if (dogId) q.dogId = dogId
+      const files = await db.collection('files').find(q).sort({ createdAt: -1 }).limit(100).toArray()
+      return handleCORS(NextResponse.json(files.map(({ _id, ...r }) => r)))
     }
 
     // --- admin ---

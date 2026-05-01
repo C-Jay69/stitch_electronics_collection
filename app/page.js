@@ -21,7 +21,7 @@ import {
   Bone, Dog as DogIcon, PawPrint, Sparkles, Apple, Dumbbell, Heart, ListChecks,
   Send, Loader2, Plus, Trash2, MessageSquare, Trophy, ShoppingBag, ChevronRight,
   Calendar, Activity, TrendingUp, Stethoscope, Wand2, Salad, LogOut, User, Crown,
-  Shield, CreditCard, Check, X, Lock, BarChart3, Users as UsersIcon, FileText, DollarSign, ArrowLeft
+  Shield, CreditCard, Check, X, Lock, BarChart3, Users as UsersIcon, FileText, DollarSign, ArrowLeft, Camera
 } from 'lucide-react'
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip as ReTooltip, CartesianGrid } from 'recharts'
 
@@ -522,6 +522,12 @@ function AccountPage({ go }) {
     toast.success('Auto-renew turned off (current period continues)')
     refresh()
   }
+  const openPortal = async () => {
+    try {
+      const r = await api('/payments/portal', { method:'POST', body: JSON.stringify({ originUrl: window.location.origin }) })
+      window.location.href = r.url
+    } catch (e) { toast.error(e.message) }
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -549,12 +555,13 @@ function AccountPage({ go }) {
               Subscription
             </CardTitle>
             <CardDescription>
-              {isPremium ? <>You're on <b>Premium {sub.plan}</b>. Renews on {sub.expiresAt ? new Date(sub.expiresAt).toLocaleDateString() : '—'}.</> : 'You are on the Free plan.'}
+              {isPremium ? <>You're on <b>Premium {sub.plan}</b>. {sub.cancelAtPeriodEnd ? 'Cancels' : 'Renews'} on {(sub.currentPeriodEnd || sub.expiresAt) ? new Date(sub.currentPeriodEnd || sub.expiresAt).toLocaleDateString() : '—'}. {sub.status && <Badge variant="outline" className="ml-1 rounded-full">{sub.status}</Badge>}</> : 'You are on the Free plan.'}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
-            <Button onClick={()=>go('pricing')} className="rounded-full"><Crown className="h-4 w-4 mr-2"/>{isPremium ? 'Extend' : 'Upgrade to Premium'}</Button>
-            {isPremium && sub.autoRenew && <Button variant="outline" onClick={cancelAuto}>Turn off auto-renew</Button>}
+            <Button onClick={()=>go('pricing')} className="rounded-full"><Crown className="h-4 w-4 mr-2"/>{isPremium ? 'Change plan' : 'Upgrade to Premium'}</Button>
+            {isPremium && <Button variant="outline" onClick={openPortal}><CreditCard className="h-4 w-4 mr-2"/>Manage in Stripe Portal</Button>}
+            {isPremium && !sub.cancelAtPeriodEnd && <Button variant="ghost" onClick={cancelAuto}>Cancel at period end</Button>}
           </CardContent>
         </Card>
 
@@ -733,6 +740,46 @@ function StatCard({ icon: Icon, label, value, accent }) {
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+// =================================================================
+// DOG AVATAR (with photo upload)
+// =================================================================
+function DogAvatar({ dog, onUploaded }) {
+  const [busy, setBusy] = useState(false)
+  const inputRef = useRef(null)
+  const handleFile = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 5 * 1024 * 1024) { toast.error('Max 5MB'); return }
+    setBusy(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      fd.append('purpose', 'dog-avatar')
+      fd.append('dogId', dog.id)
+      const res = await fetch('/api/upload', { method:'POST', body: fd, credentials:'include' })
+      if (!res.ok) throw new Error((await res.json()).error || 'Upload failed')
+      toast.success('Photo updated!')
+      onUploaded?.()
+    } catch (e) { toast.error(e.message) } finally { setBusy(false); if (inputRef.current) inputRef.current.value = '' }
+  }
+  return (
+    <div className="relative group">
+      <input ref={inputRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
+      <button onClick={() => inputRef.current?.click()} disabled={busy}
+        className="h-16 w-16 rounded-2xl bg-primary text-primary-foreground grid place-items-center shadow-lg overflow-hidden hover:opacity-90 transition-opacity">
+        {dog.photoFileId
+          ? <img key={dog.photoFileId} src={`/api/files/${dog.photoFileId}/download?t=${dog.id}`} alt={dog.name} className="h-full w-full object-cover"/>
+          : <DogIcon className="h-8 w-8"/>
+        }
+        {busy && <div className="absolute inset-0 bg-black/40 grid place-items-center"><Loader2 className="h-5 w-5 animate-spin text-white"/></div>}
+      </button>
+      <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full bg-card border-2 border-primary grid place-items-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+        <Camera className="h-3 w-3 text-primary"/>
+      </div>
+    </div>
   )
 }
 
@@ -1260,7 +1307,12 @@ function Dashboard({ go }) {
           <div className="space-y-1">
             {dogs.map(d => (
               <button key={d.id} onClick={()=>setActiveId(d.id)} className={`w-full text-left rounded-xl p-3 flex items-center gap-3 group transition-colors ${activeId===d.id ? 'bg-primary/10 ring-1 ring-primary/30' : 'hover:bg-muted'}`}>
-                <Avatar className="h-9 w-9"><AvatarFallback className="bg-amber-100 text-amber-700"><DogIcon className="h-4 w-4"/></AvatarFallback></Avatar>
+                <Avatar className="h-9 w-9">
+                  {d.photoFileId
+                    ? <img src={`/api/files/${d.photoFileId}/download`} alt={d.name} className="h-full w-full object-cover"/>
+                    : <AvatarFallback className="bg-amber-100 text-amber-700"><DogIcon className="h-4 w-4"/></AvatarFallback>
+                  }
+                </Avatar>
                 <div className="flex-1 min-w-0">
                   <div className="font-medium truncate flex items-center gap-1">{d.name} {d.isDemo && <Badge variant="outline" className="text-[10px] px-1.5 py-0 rounded-full">demo</Badge>}</div>
                   <div className="text-xs text-muted-foreground truncate">{d.breed}</div>
@@ -1296,7 +1348,7 @@ function Dashboard({ go }) {
               <div className="rounded-3xl border-2 bg-gradient-to-br from-primary/10 via-amber-100/40 to-emerald-100/30 p-6 mb-6">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div className="flex items-center gap-4">
-                    <div className="h-16 w-16 rounded-2xl bg-primary text-primary-foreground grid place-items-center shadow-lg"><DogIcon className="h-8 w-8"/></div>
+                    <DogAvatar dog={active} onUploaded={refreshDogs}/>
                     <div>
                       <h1 className="font-display text-3xl font-extrabold">{active.name}</h1>
                       <div className="text-muted-foreground">{active.breed} · {active.ageYears}yr · {active.weightKg}kg · {active.activityLevel}</div>

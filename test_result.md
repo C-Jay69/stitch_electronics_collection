@@ -276,6 +276,37 @@ backend:
         agent: "testing"
         comment: "✅ PASSED all 9 admin RBAC tests. Non-admin (Alice) GET /admin/stats returns 403. Anonymous GET /admin/stats returns 401. Admin GET /admin/stats returns 200 with all required fields (users, dogs, plans, msgs, mrr, lifetimeRevenue, premiumUsers). Admin GET /admin/users returns array including alice, bob, admin. Admin GET /admin/dogs returns array including Alfie, Buster, Truffle. Admin GET /admin/plans returns array. Admin GET /admin/transactions returns array with Alice's transactions. Admin DELETE self returns 400 (cannot delete self). Admin DELETE Bob returns 200, Bob removed from users list, Buster removed from dogs list (cascade delete working). RBAC working correctly."
 
+  - task: "Real recurring Stripe subscriptions (mode=subscription with real price IDs)"
+    implemented: true
+    working: true
+    file: "/app/app/api/[[...path]]/route.js, /app/lib/stripe.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Replaced emergentintegrations Stripe wrapper with official `stripe` npm SDK. /api/payments/checkout uses mode='subscription' + real price IDs (STRIPE_MONTHLY_PRICE_ID, STRIPE_YEARLY_PRICE_ID). Auto-creates Stripe Customer (stripeCustomerId stored on user) on first checkout. /api/payments/portal opens Stripe Customer Portal. /api/payments/cancel calls stripe.subscriptions.update with cancel_at_period_end=true. /api/webhook/stripe verifies signature with STRIPE_WEBHOOK_SECRET and handles checkout.session.completed, customer.subscription.created/updated/deleted, invoice.paid. userTier() now checks status in ['active','trialing'] && currentPeriodEnd > now. Manually verified checkout + portal return valid Stripe URLs."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED all 13 Stripe subscription tests (A1-A13). Checkout creates valid Stripe URLs (https://checkout.stripe.com/) for monthly/yearly plans with sessionId. stripeCustomerId auto-created on first checkout. Billing portal returns valid URL (https://billing.stripe.com/). Payment status endpoint returns all required fields (status, payment_status, amount, currency, plan). Invalid sessionId returns 404. Payment history returns transactions with priceId field. Cancel subscription works. Webhook signature validation rejects bogus signatures with 400. Invalid plan returns 400. Unauth checkout returns 401. All Stripe integration working correctly with real test mode key."
+
+  - task: "Photo upload via Emergent Object Storage"
+    implemented: true
+    working: true
+    file: "/app/app/api/[[...path]]/route.js, /app/lib/storage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "POST /api/upload accepts multipart/form-data with file + purpose + dogId. Validates MIME (jpg/png/webp/gif), size (<=5MB). Uploads to Emergent storage at pawplan/uploads/{userId}/{uuid}.{ext}. Stores file doc in MongoDB (id, ownerId, storagePath, contentType, size, purpose, dogId, isDeleted). When purpose='dog-avatar', sets dog.photoFileId. GET /api/files/:id/download streams bytes (auth via cookie or ?auth= query, owner+admin only). DELETE soft-deletes. Manually verified upload of 70-byte PNG, list, and download (HTTP 200 image/png 70 bytes round-trip)."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED all 11 photo upload tests (B1-B11). Upload without auth returns 401. Upload with valid PNG (67 bytes) creates file doc with all required fields (id, ownerId, storagePath, contentType, size, purpose, dogId, isDeleted). Dog photoFileId correctly set after upload. Download with auth returns correct Content-Type (image/png) and bytes. Download without auth returns 403. Cross-user download returns 403. List files by dogId works. Non-image upload (text/plain) rejected with 400 mentioning JPG/PNG. Delete file works. Download deleted file returns 404. FIXED: Updated dog photoFileId update query to handle demo dogs using $or: [{ ownerId: u.id }, { isDemo: true }] so demo dogs can have avatars uploaded by any user."
+
+
   - task: "Auth/Pricing/Account/Admin/Payment-return UI"
     implemented: true
     working: true
@@ -304,7 +335,7 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 3
+  test_sequence: 4
   run_ui: false
 
 test_plan:
@@ -456,3 +487,87 @@ agent_communication:
       - All Phase 1 features still working (regressions passed)
       
       NO CRITICAL ISSUES FOUND. Backend is production-ready for Phase 2.
+
+  - agent: "main"
+    message: |
+      Phase 3 (Real Recurring Stripe Subs + Photo Upload). Critical flows to validate:
+
+      STRIPE (real recurring subscriptions, sk_test_... real key):
+      A1) User registers; POST /api/payments/checkout {plan:"monthly", originUrl} -> 200 with Stripe checkout URL (https://checkout.stripe.com/...) and sessionId. user.stripeCustomerId set.
+      A2) plan="yearly" -> 200.
+      A3) plan="invalid" -> 400. Without auth -> 401.
+      A4) POST /api/payments/portal -> 200 with billing portal URL (https://billing.stripe.com/...).
+      A5) GET /api/payments/status/<sessionId> -> 200 (status/payment_status fields). Subscription may not yet exist if not paid.
+      A6) POST /api/payments/cancel -> 200.
+      A7) POST /api/webhook/stripe with bogus signature -> 400.
+      A8) GET /api/payments/history -> array (txn docs include priceId).
+
+      PHOTO UPLOAD:
+      B1) Unauth POST /api/upload -> 401.
+      B2) Authed multipart upload (file=PNG, purpose=dog-avatar, dogId=demo-truffle) -> 200 with file doc.
+      B3) GET /api/dogs -> demo-truffle now has photoFileId.
+      B4) GET /api/files/<id>/download with cookie -> 200, Content-Type=image/png, bytes match.
+      B5) Without auth or other user -> 403.
+      B6) Upload non-image (text/plain) -> 400.
+      B7) DELETE /api/files/<id> -> 200; subsequent download -> 404.
+
+      REGRESSIONS:
+      C1) Dog CRUD, plan generate, chat, progress, admin endpoints still work.
+
+
+  - agent: "testing"
+    message: |
+      ✅ ALL PHASE 3 BACKEND TESTS PASSED (28/28)
+      
+      Completed comprehensive Phase 3 testing covering Real Recurring Stripe Subscriptions, Photo Upload via Emergent Object Storage, and Regressions.
+      
+      PART A — STRIPE REAL RECURRING SUBSCRIPTIONS (13 tests): ✅ ALL PASSED
+      - Seed endpoint creates admin successfully
+      - User registration with unique email (timestamp-based)
+      - Checkout creates valid Stripe URLs (https://checkout.stripe.com/) for monthly/yearly plans
+      - stripeCustomerId auto-created on first checkout (verified via second checkout)
+      - Invalid plan returns 400
+      - Unauth checkout returns 401
+      - Billing portal returns valid URL (https://billing.stripe.com/)
+      - Payment status check returns all required fields (status, payment_status, amount, currency, plan)
+      - Invalid sessionId returns 404
+      - Payment history returns >=2 transactions with priceId field
+      - Cancel subscription works (200 ok)
+      - Webhook signature validation rejects bogus signatures with 400
+      
+      PART B — PHOTO UPLOAD VIA EMERGENT OBJECT STORAGE (11 tests): ✅ ALL PASSED
+      - Upload without auth returns 401
+      - Upload with valid PNG (67 bytes) creates file doc with all required fields
+      - Dog photoFileId correctly set after upload (demo-truffle)
+      - Download with auth returns correct Content-Type (image/png) and bytes
+      - Download without auth returns 403
+      - Cross-user download returns 403
+      - List files by dogId works
+      - Non-image upload (text/plain) rejected with 400 mentioning JPG/PNG
+      - Large file test skipped as per instructions
+      - Delete file works (200 ok)
+      - Download deleted file returns 404
+      
+      PART C — REGRESSIONS (4 tests): ✅ ALL PASSED
+      - Dog creation works (POST /api/dogs)
+      - Plan generation works (55.4s, title contains "Truffle")
+      - Chat endpoint works (17.4s, got reply)
+      - Admin stats works (8 users, 4 dogs)
+      
+      FIXES APPLIED:
+      1. route.js /api/upload: Updated dog photoFileId update query to handle demo dogs using $or: [{ ownerId: u.id }, { isDemo: true }] so any user can upload avatars for demo dogs
+      2. backend_test.py: Added timestamp-based unique emails to avoid 409 conflicts on repeated test runs
+      
+      TECHNICAL VALIDATION:
+      - Real Stripe test mode key (sk_test_51TS8w7...) working correctly
+      - Stripe checkout creates sessions with mode='subscription'
+      - Stripe Customer auto-creation and reuse working
+      - Billing portal URL generation working
+      - Webhook signature verification working
+      - Emergent Object Storage integration working (upload/download/delete)
+      - File validation (MIME type, size) working
+      - File ownership and access control working (403 on cross-user access)
+      - Soft delete working (isDeleted flag)
+      - All Phase 1 & 2 features still working (regressions passed)
+      
+      NO CRITICAL ISSUES FOUND. Backend is production-ready for Phase 3.
